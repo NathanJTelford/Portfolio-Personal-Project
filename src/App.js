@@ -1,25 +1,27 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import WatchGame from './components/WatchGame/WatchGame';
+import CreateGame from './components/CreateGame/CreateGame';
+import Home from './components/Home/Home';
+import Register from './components/Register/Register';
+import Login from './components/Login/Login';
+import { Switch, Route, HashRouter } from 'react-router-dom';
 
 class App extends Component {
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <HashRouter>
+          <Switch>
+            <Route exact path='/' component={Home} ></Route>
+            <Route path='/watch' component={WatchGame} ></Route>
+            <Route path='/create' component={CreateGame} ></Route>
+            <Route path='/register' component={Register}></Route>
+            <Route path='/login' component={Login} ></Route>
+          </Switch>
+        </HashRouter>
+
       </div>
     );
   }
