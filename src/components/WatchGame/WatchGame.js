@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 
 
@@ -7,8 +8,15 @@ export default class watchgame extends Component{
     constructor(props){
         super(props)
         this.state={
-            score:[]
+            score:[],
+            
         }
+    }
+
+    componentDidMount(){
+        axios.get('/watch').then(res=>
+            this.setState({score:res})
+        )
     }
 
 

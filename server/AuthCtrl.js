@@ -32,6 +32,11 @@ module.exports = {
     }, 
 
     makeGame: async (req,res) =>{
+        const {  sportName, teamName, scoreName, pointValue, periods } = req.body;
+       
+    },
+
+    saveGame: async (req,res) =>{
 
     },
 
@@ -44,3 +49,5 @@ module.exports = {
 
 
 }
+
+// db.make_game({ sportName:sportName, teamName:teamName, scoreName:scoreName, pointValue:pointValue, periods:periods})

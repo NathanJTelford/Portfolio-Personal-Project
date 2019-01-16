@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { getUserData } from '../../ducks/user';
 
 
 
-export default class creategame extends Component {
+class creategame extends Component {
     constructor() {
         super()
         this.state = {
@@ -20,7 +22,8 @@ export default class creategame extends Component {
 
     trackGame() {
         const { sportName, teamName, scoreName, pointValue, periods } =this.state;
-        axios.post('/make/makeGame', { sportName:sportName, teamName:teamName, scoreName:scoreName, pointValue:pointValue, periods:periods })
+        if(sessionStorage.user){axios.post('/save/makeGame', { sportName:sportName, teamName:teamName, scoreName:scoreName, pointValue:pointValue, periods:periods })}
+        else{axios.post('/make/makeGame', { sportName:sportName, teamName:teamName, scoreName:scoreName, pointValue:pointValue, periods:periods })}
     }
 
 
@@ -64,3 +67,8 @@ export default class creategame extends Component {
         )
     }
 }
+
+const mapState = (reduxState) => reduxState;
+
+export default connect(mapState, {getUserData})(creategame)
+
