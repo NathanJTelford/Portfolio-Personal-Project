@@ -9,6 +9,7 @@
     "express": "^4.16.4",
     "express-session": "^1.15.6",
     "massive": "^5.7.2",
+    "node-sass": "^4.11.0",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-redux": "^6.0.0",

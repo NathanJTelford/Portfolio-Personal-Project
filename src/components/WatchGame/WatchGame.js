@@ -1,50 +1,58 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import { gameName, teamName1, teamName2, pointValues, numOfPeriods } from '../../ducks/user';
+// import store from '../../store';
 
 
 
 
-export default class watchgame extends Component{
-    constructor(props){
-        super(props)
-        this.state={
-            score:[],
-            
-        }
-    }
+class watchgame extends Component {
 
-    componentDidMount(){
-        axios.get('/watch').then(res=>
-            this.setState({score:res})
-        )
-    }
+    // componentDidMount(){
+    //     const track = store({})
+    //     return track
+    // }
 
 
 
 
 
-    render(){
-        return(
+    render() {
+        const { gameName } = this.props.gameName;
+        const { periods } = this.props.numOfPeriods;
+        const {  teamName1 } = this.props.teamName1;
+        const {teamName2} =this.props.teamName2;
+        const {  scoreName, pointValue } = this.props.pointValues;
+        console.log(this.props)
+        return (
             <div className='team-stats'>
+                <nav>Nav</nav>
+                <br />
+                <div id='gameData'> {gameName} {periods} </div>
                 <div id='team1'>
+                    {teamName1}
                     <div id='add-team1-scores'>
-                    
-                    
+
                     </div>
                     <div id='team1-score'>
                         <h1>Score:</h1>
+                        <p>{pointValue}</p>
+                        <button>Add {scoreName}</button>
                     </div>
 
 
                 </div>
-                <br/>
+                <br />
                 <div id='team2'>
+                    {teamName2}
                     <div id='add-team2-scores'>
-                    
-                    
+
+
                     </div>
                     <div id='team2-score'>
                         <h1>Score:</h1>
+                        <p>{pointValue}</p>
+                        <button>Add {scoreName}</button>
                     </div>
 
                 </div>
@@ -53,3 +61,7 @@ export default class watchgame extends Component{
         )
     }
 }
+
+const mapState = (reduxState) => reduxState;
+
+export default connect(mapState, { gameName, teamName1, teamName2, pointValues, numOfPeriods })(watchgame)

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import './App.scss';
 import WatchGame from './components/WatchGame/WatchGame';
 import CreateGame from './components/CreateGame/CreateGame';
 import Home from './components/Home/Home';
