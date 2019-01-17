@@ -4,55 +4,75 @@ const initialState = {
     periods: [],
     team1: {},
     team2: {},
-    points: []
+    concatPoints: [],
+    scoreType: '',
+    scoreValue: 0
 }
 
-const NUM_OF_PERIODS = 'NUM_OF_PERIODS'
 const GET_USER_DATA = 'GET_USER_DATA';
 const GAME_NAME = 'GAME_NAME';
-const POINT_VALUES = 'POINT_VALUES';
+const NUM_OF_PERIODS = 'NUM_OF_PERIODS'
 const TEAM_NAME_1 = 'TEAM_NAME_1';
-const TEAM_NAME_2 = 'TEAM_NAME_2'
+const TEAM_NAME_2 = 'TEAM_NAME_2';
+const SCORE_TYPE = 'SCORE_TYPE'
+const SCORE_VALUE = 'SCORE_VALUE'
+const CONCAT_SCORE = 'CONCAT_SCORE';
 
-export function getUserData(userInfo) {
+
+export function GetUserData(userInfo) {
     return {
         type: GET_USER_DATA,
         payload: userInfo
     }
 }
-
-export function numOfPeriods(periods) {
-    return {
-        type: NUM_OF_PERIODS,
-        payload: periods
-    }
-}
-
-export function gameName(gameName) {
+export function updateGameName(gameName) {
     return {
         type: GAME_NAME,
         payload: gameName
     }
 }
 
-export function teamName1(teamName1) {
+export function updateNumOfPeriods(periods) {
+    return {
+        type: NUM_OF_PERIODS,
+        payload: periods
+    }
+}
+
+
+export function updateTeamName1(teamName1) {
     return {
         type: TEAM_NAME_1,
         payload: teamName1
     }
 }
 
-export function teamName2(teamName2) {
+export function updateTeamName2(teamName2) {
     return {
         type: TEAM_NAME_2,
         payload: teamName2
     }
 }
 
-export function pointValues(pointValue) {
+
+export function updateScoreType(scoreType) {
     return {
-        type: POINT_VALUES,
-        payload: pointValue
+        type: SCORE_TYPE,
+        payload: scoreType
+    }
+}
+
+export function updateScoreValue( scoreValue) {
+    return {
+        type: SCORE_VALUE,
+        payload:  scoreValue
+    }
+}
+
+export function updateConcatPoints(scoreType, scoreValue) {
+    return {
+        type: CONCAT_SCORE,
+        payload: scoreType + scoreValue
     }
 }
 
@@ -73,13 +93,15 @@ export default function reducer(state = initialState, action) {
         case TEAM_NAME_2:
             return { ...state, teamName2: action.payload };
 
-        case POINT_VALUES:
-            return { ...state, points: action.payload };
-
         case NUM_OF_PERIODS:
             return { ...state, periods: action.payload };
+
+        case CONCAT_SCORE:
+            return { ...state, concatPoints: action.payload }
 
 
         default: return state;
     }
 }
+
+

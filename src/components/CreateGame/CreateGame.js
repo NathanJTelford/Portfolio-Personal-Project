@@ -1,18 +1,25 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { gameName, teamName1, teamName2, pointValues, numOfPeriods } from '../../ducks/user';
+import { updateGameName, updateTeamName1, updateTeamName2, updateConcatPoints, updateNumOfPeriods } from '../../ducks/user';
 
 
 
 class creategame extends Component {
+    constructor() {
+        super()
+        this.state = {
+            scoreType: '',
+            scoreValue: 0
+        }
+    }
 
 
 
     render() {
         return (
             <div>
-                <nav></nav>
+                <nav>Nav</nav>
                 <br />
 
 
@@ -22,17 +29,20 @@ class creategame extends Component {
 
                 <br />
 
-                <input onChange={(e) => this.props.gameName(e.target.value)} name='sportType' id='sportType' />
+                <input onChange={(e) => this.props.updateGameName(e.target.value)} value={this.props.gameName} name='sportType' id='sportType' />
 
                 <br />
 
                 <p>Next you need to define the names of the opposing teams. eg. The Eagles</p>
-                <label for='teamName'>Team Name</label>
+                <label for='teamName1'>Team 1.</label>
 
                 <br />
 
-                <input onChange={(e) => this.props.teamName1(e.target.value )} name='teamName' id='teamName' />
-                <input onChange={(e) => this.props.teamName2(e.target.value )} name='teamName' id='teamName' />
+                <input onChange={(e) => this.props.updateTeamName1(e.target.value)} value={this.props.teamName1} name='teamName1' id='teamName1' />
+                <br />
+                <label for='teamName2'>Team 2.</label>
+                <br />
+                <input onChange={(e) => this.props.updateTeamName2(e.target.value)} value={this.props.teamName2} name='teamName2' id='teamName2' />
 
                 <br />
 
@@ -41,38 +51,38 @@ class creategame extends Component {
 
                 <label for='scoreType'>Score Type Name:</label>
 
-                <input onChange={(e) => this.props.pointValues( e.target.value )} name='scoreType' id='scoreType' placeholder='Touchdown' />
+                <input onChange={(e) => this.setState({ scoreType: e.target.value })} name='scoreType' id='scoreType' placeholder='Touchdown' />
 
                 <label for='pointValue'>Number Of Points Awarded:</label>
 
-                <input onChange={(e) => this.props.pointValues(  e.target.value)} name='pointValue' id='pointValue' placeholder='6' />
-
-                <br/>
-
-                <button>ADD SCORING METHOD</button>
+                <input onChange={(e) => this.setState({ scoreValue: e.target.value })} name='pointValue' id='pointValue' placeholder='6' />
 
                 <br />
 
-                <p>Last thing to do is tell us how many periods or halfs there will be.</p>
+                <button onClick={() => this.props.updateConcatPoints(this.state.scoreType, this.state.scoreValue)} value={this.props.concatPoints}>ADD SCORING METHOD</button>
+
+                <br />
+
+                <p>Last thing to do is tell us how many periods there will be.</p>
 
 
                 <br />
                 <label for='periods'>Number Of Periods:</label>
 
                 <select id='periods' name='periods'>
-                <option value='' >Select</option>
-                <options >1</options>
-                <options >2</options>
-                <options >3</options>
-                <options >4</options>
-                <options >5</options>
-                <options >6</options>
-                <options >7</options>
-                <options >8</options>
-                <options >9</options>
-                <options >10</options>
-                <options >11</options>
-                <options >12</options>
+                    <option value='' >Select</option>
+                    <option onChange={(e) => this.props.numOfPeriods(e.target.value)} >1</option>
+                    <option onChange={(e) => this.props.numOfPeriods(e.target.value)} >2</option>
+                    <option onChange={(e) => this.props.numOfPeriods(e.target.value)} >3</option>
+                    <option onChange={(e) => this.props.numOfPeriods(e.target.value)} >4</option>
+                    <option onChange={(e) => this.props.numOfPeriods(e.target.value)} >5</option>
+                    <option onChange={(e) => this.props.numOfPeriods(e.target.value)} >6</option>
+                    <option onChange={(e) => this.props.numOfPeriods(e.target.value)} >7</option>
+                    <option onChange={(e) => this.props.numOfPeriods(e.target.value)} >8</option>
+                    <option onChange={(e) => this.props.numOfPeriods(e.target.value)} >9</option>
+                    <option onChange={(e) => this.props.numOfPeriods(e.target.value)} >10</option>
+                    <option onChange={(e) => this.props.numOfPeriods(e.target.value)} >11</option>
+                    <option onChange={(e) => this.props.numOfPeriods(e.target.value)} >12</option>
                 </select>
 
                 <br />
@@ -95,8 +105,4 @@ class creategame extends Component {
 
 const mapState = (reduxState) => reduxState;
 
-export default connect(mapState, { gameName, teamName1, teamName2, pointValues, numOfPeriods })(creategame)
-
-
-
-{/* <input onChange={(e) => this.props.numOfPeriods(e.target.value)} name='periods' id='periods' /> */}
+export default connect(mapState, { updateGameName, updateTeamName1, updateTeamName2, updateConcatPoints, updateNumOfPeriods })(creategame)

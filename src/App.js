@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
 import './App.scss';
+import './components/WatchGame/WatchGame.scss';
+import './components/CreateGame/CreateGame.scss';
+import './components/Home/Home.scss';
+import './components/Login/Login.scss';
+import './components/Register/Register.scss';
 import WatchGame from './components/WatchGame/WatchGame';
 import CreateGame from './components/CreateGame/CreateGame';
 import Home from './components/Home/Home';

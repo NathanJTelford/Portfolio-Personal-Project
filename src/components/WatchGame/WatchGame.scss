@@ -1,0 +1,43 @@
+
+
+*{
+ width: 100%vw;
+ height: 100%vh;
+}
+
+    $scoreFont:4em;
+
+.teamStats{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0;
+  
+    
+    #team1{
+        display:flex;
+        
+        .scores{
+            font-size: $scoreFont;
+        }
+        #add-team1-scores{
+
+
+        }
+
+        #team1-score{
+            
+
+        }
+        
+        background-color: blue;
+        
+        
+    }
+    
+    #team2{
+        background-color: red;
+        
+    }
+}
