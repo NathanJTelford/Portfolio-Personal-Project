@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { updateGameName, updateTeamName1, updateTeamName2, updateConcatPoints, updateNumOfPeriods } from '../../ducks/user';
+import axios from 'axios';
+import { updateGameName, updateTeamName1, updateTeamName2, updateConcatPoints, updateNumOfPeriods, updateScoreValue, updateScoreType } from '../../ducks/user';
 
 
 
@@ -12,6 +13,12 @@ class creategame extends Component {
             scoreType: '',
             scoreValue: 0
         }
+    }
+
+
+    handleSaveGame() {
+        const { updateGameName, updateTeamName1, updateTeamName2, updateConcatPoints, updateNumOfPeriods } = this.props;
+        axios.post('/auth/save_game', { updateGameName, updateTeamName1, updateTeamName2, updateConcatPoints, updateNumOfPeriods })
     }
 
 
@@ -51,11 +58,11 @@ class creategame extends Component {
 
                 <label for='scoreType'>Score Type Name:</label>
 
-                <input onChange={(e) => this.setState({ scoreType: e.target.value })} name='scoreType' id='scoreType' placeholder='Touchdown' />
+                <input onChange={(e) => this.props.updateScoreType(e.target.value)} name='scoreType' id='scoreType' placeholder='Touchdown' />
 
                 <label for='pointValue'>Number Of Points Awarded:</label>
 
-                <input onChange={(e) => this.setState({ scoreValue: e.target.value })} name='pointValue' id='pointValue' placeholder='6' />
+                <input onChange={(e) => this.props.updateScoreValue(e.target.value)} name='pointValue' id='pointValue' placeholder='6' />
 
                 <br />
 
@@ -70,24 +77,25 @@ class creategame extends Component {
                 <label for='periods'>Number Of Periods:</label>
 
                 <select id='periods' name='periods'>
-                    <option value='' >Select</option>
-                    <option onChange={(e) => this.props.numOfPeriods(e.target.value)} >1</option>
-                    <option onChange={(e) => this.props.numOfPeriods(e.target.value)} >2</option>
-                    <option onChange={(e) => this.props.numOfPeriods(e.target.value)} >3</option>
-                    <option onChange={(e) => this.props.numOfPeriods(e.target.value)} >4</option>
-                    <option onChange={(e) => this.props.numOfPeriods(e.target.value)} >5</option>
-                    <option onChange={(e) => this.props.numOfPeriods(e.target.value)} >6</option>
-                    <option onChange={(e) => this.props.numOfPeriods(e.target.value)} >7</option>
-                    <option onChange={(e) => this.props.numOfPeriods(e.target.value)} >8</option>
-                    <option onChange={(e) => this.props.numOfPeriods(e.target.value)} >9</option>
-                    <option onChange={(e) => this.props.numOfPeriods(e.target.value)} >10</option>
-                    <option onChange={(e) => this.props.numOfPeriods(e.target.value)} >11</option>
-                    <option onChange={(e) => this.props.numOfPeriods(e.target.value)} >12</option>
+                    <option onChange={(e) => this.props.numOfPeriods(e.target.value)} value='' >Select</option>
+                    <option  >1</option>
+                    <option >2</option>
+                    <option >3</option>
+                    <option >4</option>
+                    <option >5</option>
+                    <option >6</option>
+                    <option >7</option>
+                    <option >8</option>
+                    <option >9</option>
+                    <option >10</option>
+                    <option >11</option>
+                    <option >12</option>
                 </select>
 
                 <br />
 
                 <h4 id='conditionalRenderText'>Great! now remember to register if you want to save your work for later use</h4>
+                <button onClick={() => this.handleSaveGame()}>Save</button>
 
                 <br />
 
@@ -105,4 +113,4 @@ class creategame extends Component {
 
 const mapState = (reduxState) => reduxState;
 
-export default connect(mapState, { updateGameName, updateTeamName1, updateTeamName2, updateConcatPoints, updateNumOfPeriods })(creategame)
+export default connect(mapState, { updateGameName, updateTeamName1, updateTeamName2, updateConcatPoints, updateNumOfPeriods, updateScoreValue, updateScoreType})(creategame)

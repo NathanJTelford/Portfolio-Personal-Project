@@ -17,14 +17,13 @@ export default class register extends Component {
 
     handleUsername(val) {
         this.setState({ username: val })
-        // console.log(val)
     }
 
     handleEmail(val) {
         this.setState({ email: val })
     }
 
-    handlePassword(val) {
+    handlePasswordCreate(val) {
         this.setState({ password: val })
     }
 
@@ -34,9 +33,10 @@ export default class register extends Component {
 
     async handleRegister() {
         const { username, email, password, pic } = this.state;
-        let res = await axios.post('/auth/register', { username: username, email: email, password: password, pic: pic }).then(res => {
-            console.log(res.data)
-        })
+        let res = await axios.post('/auth/register', { username: username, email: email, password: password, pic: pic })
+        if (res.data.registered){
+            this.props.history.push('/')
+        }
         
     }
 
@@ -61,7 +61,7 @@ export default class register extends Component {
                 <div>
                     <label for='password'>Password</label>
                     <br />
-                    <input onChange={(e) => this.handlePassword(e.target.value)} type='text' name='password' id='password' type='password' />
+                    <input onChange={(e) => this.handlePasswordCreate(e.target.value)} type='text' name='password' id='password' type='password' />
                 </div>
                 <br />
                 <div>

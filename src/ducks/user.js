@@ -1,9 +1,9 @@
 const initialState = {
     user: {},
-    gameName: {},
-    periods: [],
-    team1: {},
-    team2: {},
+    gameName: '',
+    periods: 0,
+    team1: '',
+    team2: '',
     concatPoints: [],
     scoreType: '',
     scoreValue: 0
@@ -72,7 +72,7 @@ export function updateScoreValue( scoreValue) {
 export function updateConcatPoints(scoreType, scoreValue) {
     return {
         type: CONCAT_SCORE,
-        payload: scoreType + scoreValue
+        payload: [...[], scoreType, scoreValue]
     }
 }
 

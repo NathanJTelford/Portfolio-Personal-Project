@@ -14,9 +14,13 @@ export default class login extends Component{
     }
 
 
-    handleLogin(){
+
+    async handleLogin(){
         const {email,password} = this.state;
-        axios.post('/auth/login',{email:email, password:password})
+       let res = await axios.post('/auth/login',{email:email, password:password})
+        if(res.data.loggedIn){
+            this.props.history.push('/')
+        }
     }
 
 

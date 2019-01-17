@@ -23,7 +23,7 @@ massive(CONNECTION_STRING).then(dbInstance => {
 
 app.post('/auth/register', authCTRL.register);
 app.post('/auth/login', authCTRL.login);
-app.post('/save/makeGame', authCTRL.saveGame);
+app.post('/auth/save_game', authCTRL.saveGame);
 app.post('/make/makeGame', authCTRL.makeGame);
 app.get('/auth/logout', (req,res)=>{
     req.session.destroy();

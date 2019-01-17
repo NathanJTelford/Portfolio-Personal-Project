@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { updateGameName, updateTeamName1, updateTeamName2, updateConcatPoints, updateNumOfPeriods } from '../../ducks/user';
+import { updateGameName, updateTeamName1, updateTeamName2, updateConcatPoints, updateNumOfPeriods, updateScoreValue, updateScoreType } from '../../ducks/user';
 // import store from '../../store';
 
 
@@ -55,4 +55,4 @@ class watchgame extends Component {
 
 const mapState = (reduxState) => reduxState;
 
-export default connect(mapState, { updateGameName, updateTeamName1, updateTeamName2, updateConcatPoints, updateNumOfPeriods })(watchgame)
+export default connect(mapState, { updateGameName, updateTeamName1, updateTeamName2, updateConcatPoints, updateNumOfPeriods, updateScoreValue, updateScoreType })(watchgame)
