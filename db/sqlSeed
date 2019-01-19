@@ -7,6 +7,9 @@ create table game (game_id serial primary key, winner_id int REFERENCES team(tea
 Team Table
 create table team (team_id serial primary key, team_name varchar(45))
 
+Team 2 Table
+create table team_2 (team_id serial primary key, team_name varchar(45))
+
 ScoreType Table
 create table score_type(score_id serial primary key, name varchar(20), point_value int, game_id int REFERENCES game_type(game_type_id) )
 

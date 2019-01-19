@@ -1,51 +1,125 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { getGameData } from './../../ducks/user';
 import { connect } from 'react-redux';
-import { updateGameName, updateTeamName1, updateTeamName2, updateConcatPoints, updateNumOfPeriods, updateScoreValue, updateScoreType } from '../../ducks/user';
-// import store from '../../store';
 
 
 
+class watchGame extends Component {
+    constructor() {
+        super()
+        this.state = {
+            teamOneScore: 0,
+            teamTwoScore: 0,
+            gameName: '',
+            teamName1: '',
+            teamName2: ''
 
-class watchgame extends Component {
+        }
+    }
+
+    async componentDidMount() {
+        try {
+            const res = await axios.get('/getGame')
+            this.props.getGameData(res.data)
+            console.log(this.props)
+
+        } catch (e) {
+            console.log('Game not found', e)
+        }
+
+    }
+
+    componentWillUnmount(){
+        axios.post(`/scorekeeper/${this.state.teamOneScore}/${this.state.teamTwoScore}`).then(res=>{
+            const { teamOneScore, teamTwoScore } = res.session.score;
+            this.setState({teamOneScore:teamOneScore, teamTwoScore:teamTwoScore})
+        })
+    }
+
+    handlePointOneT1() {
+        let newScore = this.state.teamOneScore;
+        newScore = newScore + 1
+        this.setState({ teamOneScore: newScore })
+    }
+
+    handlePointTwoT1() {
+        let newScore = this.state.teamOneScore;
+        newScore = newScore + 2
+        this.setState({ teamOneScore: newScore })
+
+    }
+
+    handlePointThreeT1() {
+        let newScore = this.state.teamOneScore;
+        newScore = newScore + 3
+        this.setState({ teamOneScore: newScore })
+
+    }
+
+    handlePointOneT2() {
+        let newScore = this.state.teamTwoScore;
+        newScore = newScore + 1
+        this.setState({ teamTwoScore: newScore })
+
+    }
+
+    handlePointTwoT2() {
+        let newScore = this.state.teamTwoScore;
+        newScore = newScore + 2
+        this.setState({ teamTwoScore: newScore })
+
+    }
+
+    handlePointThreeT2() {
+        let newScore = this.state.teamTwoScore;
+        newScore = newScore + 3
+        this.setState({ teamTwoScore: newScore })
+
+    }
 
 
 
 
 
     render() {
-        const { gameName, teamName1, teamName2, concatPoints, numOfPeriods } = this.props;
-        console.log(this.props)
+        const { name, teamName1, teamName2 } = this.props.game;
         return (
-            <div className='team-stats'>
-                <nav>Nav</nav>
-                <br />
+            <div>
+                <nav id='home-nav'>
+                    <Link to='/'>
+                        <h2>SportsTrack</h2>
+                    </Link>
+                    <ul>
+                        <Link to='/login'>
+                            <li>Login</li>
+                        </Link>
+                        <Link to='/register'>
+                            <li>Register</li>
+                        </Link>
+                    </ul>
+                </nav>
+                <h1>{name}</h1>
 
-                <div id='gameData'> {gameName} {numOfPeriods} </div>
-                <div id='team1'>
-                    {teamName1}
-                    <div id='add-team1-scores'>
-
+                <div className='team-one'>
+                    <div>{teamName1}</div>
+                    <button onClick={() => this.handlePointOneT1()} >1 Point</button>
+                    <button onClick={() => this.handlePointTwoT1()} >2 Points</button>
+                    <button onClick={() => this.handlePointThreeT1()} >3 Points</button>
+                    <div id='teamOneScore'>
+                        {this.state.teamOneScore}
                     </div>
-                    <div id='team1-score'>
-                        <p>{concatPoints}</p>
-                        <h1 className='scores'>Score:</h1>
-                        <button>Add {concatPoints}</button>
-                    </div>
-
-
                 </div>
-                <div id='team2'>
-                    {teamName2}
-                    <div id='add-team2-scores'>
-
-
+                <br />
+                <div className='team-two'>
+                    <div>{teamName2}</div>
+                    <button onClick={() => this.handlePointOneT2()} >1 Point</button>
+                    <button onClick={() => this.handlePointTwoT2()} >2 Points</button>
+                    <button onClick={() => this.handlePointThreeT2()} >3 Points</button>
+                    <div id='teamTwoScore'>
+                        {this.state.teamTwoScore}
                     </div>
-                    <div id='team2-score'>
-                        <p>{concatPoints}</p>
-                        <h1 className='scores'>Score:</h1>
-                        <button>Add {concatPoints}</button>
-                    </div>
-
                 </div>
 
             </div>
@@ -54,5 +128,4 @@ class watchgame extends Component {
 }
 
 const mapState = (reduxState) => reduxState;
-
-export default connect(mapState, { updateGameName, updateTeamName1, updateTeamName2, updateConcatPoints, updateNumOfPeriods, updateScoreValue, updateScoreType })(watchgame)
+export default connect(mapState, { getGameData })(watchGame)

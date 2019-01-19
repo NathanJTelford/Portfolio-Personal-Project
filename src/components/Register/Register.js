@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 
 export default class register extends Component {
@@ -34,17 +35,19 @@ export default class register extends Component {
     async handleRegister() {
         const { username, email, password, pic } = this.state;
         let res = await axios.post('/auth/register', { username: username, email: email, password: password, pic: pic })
-        if (res.data.registered){
+        if (res.data.registered) {
             this.props.history.push('/')
         }
-        
+
     }
 
 
     render() {
         return (
             <div className='register'>
-                <nav>Nav</nav>
+                <Link to='/'>
+                    <button>Back</button>
+                </Link>
                 <br />
                 <div>
                     <label for='username'>username</label>

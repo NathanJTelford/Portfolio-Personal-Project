@@ -21,13 +21,16 @@ class Home extends Component {
     render() {
         return (
             <div className='main'>
+                <Link to='/'>
+                    <h2>SportsTrack</h2>
+                </Link>
                 <nav id='home-nav'>
                     <ul>
                         <Link to='/login'>
                             <li>Login</li>
                         </Link>
                         <Link to='/register'>
-                        <li>Register</li>
+                            <li>Register</li>
                         </Link>
                     </ul>
                 </nav>

@@ -32,31 +32,43 @@ module.exports = {
     },
 
     makeGame: async (req, res) => {
-     
-
-    },
-
-    saveGame: async (req, res) => {
-        const {  updateGameName, updateTeamName1, updateTeamName2, updateConcatPoints, updateNumOfPeriods } = this.props;
-        const { email } = req.session.user;
+        const { gameName, teamName1, teamName2 } = req.body;
         const db = req.app.get('db');
-        let saveLock = await db.find_coach({ email: email });
-        if (!saveLock) {
-            return res.status(200).send({ message: 'Please Log In To Save A Game' })
-        } else { await db.saveGame(updateGameName, updateTeamName1, updateTeamName2, updateConcatPoints, updateNumOfPeriods)
-        }
-        res.status(200).send({message:'Save Successful'}).catch(error=>{console.log(error)})
+        await db.make_game({ name: gameName, teamName1: teamName1, teamName2: teamName2 })
+        req.session.game = { name: gameName, teamName1: teamName1, teamName2: teamName2 }
+        res.status(200).send(req.session.game)
+
     },
 
+    getGame:(req,res)=>{
+        console.log(req.session)
+        res.status(200).send(req.session.game)
+    },
 
     userData: (req, res) => {
         if (req.session.user) {
             res.status(200).send(req.session.user)
         }
         else { res.status(401).send({ message: 'Please Log In' }) }
-    }
+    },
+
+scoreKeeper: (req,res) =>{
+    const { teamOneScore, teamTwoScore } =req.params;
+    req.session.score = { teamOneScore, teamTwoScore }
+    res.status(200).send({message:'Score Saved', scoreData: req.session.score})
+}
 
 
 }
 
-// db.make_game({ sportName:sportName, teamName:teamName, scoreName:scoreName, pointValue:pointValue, periods:periods})
+// saveGame: async (req, res) => {
+//     const {  updateGameName, updateTeamName1, updateTeamName2, updateConcatPoints, updateNumOfPeriods } = this.props;
+//     const { email } = req.session.user;
+//     const db = req.app.get('db');
+//     let saveLock = await db.find_coach({ email: email });
+//     if (!saveLock) {
+//         return res.status(200).send({ message: 'Please Log In To Save A Game' })
+//     } else { await db.saveGame(updateGameName, updateTeamName1, updateTeamName2, updateConcatPoints, updateNumOfPeriods)
+//     }
+//     res.status(200).send({message:'Save Successful'}).catch(error=>{console.log(error)})
+// },

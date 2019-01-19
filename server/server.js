@@ -23,8 +23,15 @@ massive(CONNECTION_STRING).then(dbInstance => {
 
 app.post('/auth/register', authCTRL.register);
 app.post('/auth/login', authCTRL.login);
-app.post('/auth/save_game', authCTRL.saveGame);
-app.post('/make/makeGame', authCTRL.makeGame);
+app.post('/makeGame', authCTRL.makeGame);
+app.post(`/scorekeeper/:?{teamOneScore}/?{teamTwoScore}`,authCTRL.scoreKeeper )
+app.get('/getGame', authCTRL.getGame);
+app.get('/test', async (req,res)=>{
+    const db = app.get('db');
+  const reply = await db.test()
+  console.log(reply);
+  res.sendStatus(200)
+})
 app.get('/auth/logout', (req,res)=>{
     req.session.destroy();
     res.redirect('http://localhost:3000/#/');
