@@ -1,0 +1,64 @@
+.main{
+    button{
+        border-radius: 5px;
+    }
+    
+    #home-nav{
+        display: flex;
+        height: 51px;
+        background-color: rgb(94, 15, 15);
+        width: 100vw;
+        padding: 0;
+        margin: 0;
+        
+        
+        img{
+            
+            align-items: center;
+            height: 35px;
+            width: 140px;
+        }
+        
+        li{
+            color: white;
+        }
+        
+        .login  {
+            width: 70px;
+            justify-content: start
+        }
+        
+        .register{
+            justify-content: start
+        }
+        
+    }
+
+}
+
+#welcome{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 2em;
+    margin: 0;
+    padding: 1em;
+    p{
+        font-size: 25px;
+    }
+}
+
+
+
+
+    
+    #make_game{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 1em;
+    }
+
+
+
+

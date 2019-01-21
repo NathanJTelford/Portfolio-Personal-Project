@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './../src/reset.css'
 import './App.scss';
 import './components/WatchGame/WatchGame.scss';
 import './components/CreateGame/CreateGame.scss';
@@ -16,17 +17,23 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <HashRouter>
-          <Switch>
-            <Route exact path='/' component={Home} ></Route>
-            <Route path='/watch' component={WatchGame} ></Route>
-            <Route path='/create' component={CreateGame} ></Route>
-            <Route path='/register' component={Register}></Route>
-            <Route path='/login' component={Login} ></Route>
-          </Switch>
-        </HashRouter>
+      <div className='super-background'>
 
+        <div className='background'>
+          <div className="App">
+
+            <HashRouter>
+              <Switch>
+                <Route exact path='/' component={Home} ></Route>
+                <Route path='/watch' component={WatchGame} ></Route>
+                <Route path='/create' component={CreateGame} ></Route>
+                <Route path='/register' component={Register}></Route>
+                <Route path='/login' component={Login} ></Route>
+              </Switch>
+            </HashRouter>
+          </div>
+
+        </div>
       </div>
     );
   }

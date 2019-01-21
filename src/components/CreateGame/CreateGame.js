@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import Logo from  './../../../src/LogoMakr_1vONm5.png';
 
 
 export default class creatGame extends Component {
@@ -28,17 +29,25 @@ export default class creatGame extends Component {
     render() {
         return (
             <div>
-                <nav id='home-nav'>
-                    <Link to='/'>
-                        <h2>SportsTrack</h2>
-                    </Link>
+                 <nav id='home-nav'>
+                <div className='logo'>
+
+                <Link to='/'>
+                <img src={Logo} alt=''/>
+                </Link>
+
+                </div>
                     <ul>
+                    <div className='login'>
                         <Link to='/login'>
-                            <li>Login</li>
+                            <li href='/login'>Login</li>
                         </Link>
+                    </div>
+                    <div className='register'>
                         <Link to='/register'>
                             <li>Register</li>
                         </Link>
+                    </div>
                     </ul>
                 </nav>
 

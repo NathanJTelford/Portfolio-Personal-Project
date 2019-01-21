@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import  Logo  from './../../../src/LogoMakr_1vONm5.png';
 
 class Home extends Component {
     constructor() {
@@ -21,20 +22,28 @@ class Home extends Component {
     render() {
         return (
             <div className='main'>
-                <Link to='/'>
-                    <h2>SportsTrack</h2>
-                </Link>
                 <nav id='home-nav'>
+                <div className='logo'>
+
+                <Link to='/'>
+                   <img src={Logo} alt=''/>
+                </Link>
+
+                </div>
                     <ul>
+                    <div className='login'>
                         <Link to='/login'>
-                            <li>Login</li>
+                            <li href='/login'>Login</li>
                         </Link>
+                    </div>
+                    <div className='register'>
                         <Link to='/register'>
                             <li>Register</li>
                         </Link>
+                    </div>
                     </ul>
                 </nav>
-                <div>
+                <div id='welcome'>
                     <h1>Welcome!</h1>
                     <p> Let's get started. to start watching the score enter your 4 character field code here.</p>
                     <input type='text' placeholder='Field Code' onChange={(e) => { this.handleCode(e.target.value) }} />
@@ -43,7 +52,7 @@ class Home extends Component {
                         <button>Watch Game</button>
                     </Link>
                 </div>
-                <div>
+                <div id='make_game'>
                     <p>Login or register to save your customized games!</p>
                     <p>Or create a quick game here</p>
                     <Link to='/create'>

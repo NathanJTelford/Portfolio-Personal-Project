@@ -16,10 +16,17 @@ app.use(session({
     saveUninitialized: false
 }))
 
+
+
 massive(CONNECTION_STRING).then(dbInstance => {
     app.set('db', dbInstance);
-    app.listen(SERVER_PORT, () => { console.log('Battle Cruiser Operational') })
+ app.listen(SERVER_PORT, () => { console.log('Battle Cruiser Operational') });
 })
+
+
+// app.use(express.static('./public'));
+
+
 
 app.post('/auth/register', authCTRL.register);
 app.post('/auth/login', authCTRL.login);

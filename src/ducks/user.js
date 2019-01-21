@@ -1,14 +1,17 @@
 const initialState = {
     user: {},
-    game: {}
+    game: {},
+    score: {teamOneScore:0,
+    teamTwoScore:0}
 }
 
 const GET_USER_DATA = 'GET_USER_DATA';
 const GET_GAME_DATA = 'GET_GAME_DATA';
+const GET_SCORE_DATA = 'GET_SCORE_DATA'
 
 
 
-export function GetUserData(userInfo) {
+export function getUserData(userInfo) {
     return {
         type: GET_USER_DATA,
         payload: userInfo
@@ -22,6 +25,13 @@ export function getGameData(gameInfo) {
     }
 }
 
+export function getScoreData(scoreInfo) {
+    return {
+        type: GET_SCORE_DATA,
+        payload: scoreInfo
+    }
+}
+
 
 
 export default function reducer(state = initialState, action) {
@@ -32,7 +42,10 @@ export default function reducer(state = initialState, action) {
             return { ...state, user: action.payload };
 
         case GET_GAME_DATA:
-            return { ...state, game: action.payload }
+            return { ...state, game: action.payload };
+
+        case GET_SCORE_DATA:
+            return { ...state, score: action.payload }
 
 
 

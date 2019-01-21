@@ -40,7 +40,8 @@ module.exports = {
 
     },
 
-    getGame:(req,res)=>{
+
+    getGame: (req, res) => {
         console.log(req.session)
         res.status(200).send(req.session.game)
     },
@@ -52,11 +53,16 @@ module.exports = {
         else { res.status(401).send({ message: 'Please Log In' }) }
     },
 
-scoreKeeper: (req,res) =>{
-    const { teamOneScore, teamTwoScore } =req.params;
-    req.session.score = { teamOneScore, teamTwoScore }
-    res.status(200).send({message:'Score Saved', scoreData: req.session.score})
-}
+    scoreKeeper: (req, res) => {
+        const { teamOneScore, teamTwoScore } = req.params;
+        req.session.score = { teamOneScore:teamOneScore, teamTwoScore:teamTwoScore }
+        console.log(req.params)
+        res.status(200).send({ message: 'Score Saved', getScoreData: req.session.score })
+    },
+
+    getScoreData: (req, res) => {
+        res.status(200).send(req.session.score)
+    },
 
 
 }

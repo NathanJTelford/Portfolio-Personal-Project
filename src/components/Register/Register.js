@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-
+import Logo from  './../../../src/LogoMakr_1vONm5.png';
 
 export default class register extends Component {
     constructor() {
@@ -46,7 +46,7 @@ export default class register extends Component {
         return (
             <div className='register'>
                 <Link to='/'>
-                    <button>Back</button>
+                <img src={Logo} alt=''/>
                 </Link>
                 <br />
                 <div>

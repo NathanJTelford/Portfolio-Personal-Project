@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { getGameData } from './../../ducks/user';
+import { getGameData, getScoreData } from './../../ducks/user';
 import { connect } from 'react-redux';
+import Logo from  './../../../src/LogoMakr_1vONm5.png';
 
 
 
@@ -22,7 +23,9 @@ class watchGame extends Component {
     async componentDidMount() {
         try {
             const res = await axios.get('/getGame')
-            this.props.getGameData(res.data)
+            this.props.getGameData(res.data);
+            const { teamOneScore, teamTwoScore } = this.session.score
+            this.setState({ teamOneScore: teamOneScore, teamTwoScore: teamTwoScore })
             console.log(this.props)
 
         } catch (e) {
@@ -31,11 +34,9 @@ class watchGame extends Component {
 
     }
 
-    componentWillUnmount(){
-        axios.post(`/scorekeeper/${this.state.teamOneScore}/${this.state.teamTwoScore}`).then(res=>{
-            const { teamOneScore, teamTwoScore } = res.session.score;
-            this.setState({teamOneScore:teamOneScore, teamTwoScore:teamTwoScore})
-        })
+
+    componentWillUnmount() {
+        axios.post(`/scorekeeper/${this.state.teamOneScore}/${this.state.teamTwoScore}`)
     }
 
     handlePointOneT1() {
@@ -87,17 +88,25 @@ class watchGame extends Component {
         const { name, teamName1, teamName2 } = this.props.game;
         return (
             <div>
-                <nav id='home-nav'>
-                    <Link to='/'>
-                        <h2>SportsTrack</h2>
-                    </Link>
+                 <nav id='home-nav'>
+                <div className='logo'>
+
+                <Link to='/'>
+                <img src={Logo} alt=''/>
+                </Link>
+
+                </div>
                     <ul>
+                    <div className='login'>
                         <Link to='/login'>
-                            <li>Login</li>
+                            <li href='/login'>Login</li>
                         </Link>
+                    </div>
+                    <div className='register'>
                         <Link to='/register'>
                             <li>Register</li>
                         </Link>
+                    </div>
                     </ul>
                 </nav>
                 <h1>{name}</h1>
@@ -128,4 +137,4 @@ class watchGame extends Component {
 }
 
 const mapState = (reduxState) => reduxState;
-export default connect(mapState, { getGameData })(watchGame)
+export default connect(mapState, { getGameData, getScoreData })(watchGame)
