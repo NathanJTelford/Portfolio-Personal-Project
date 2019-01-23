@@ -1,81 +1,92 @@
 
 
-    $scoreFont:4em;
+    $scoreFont_small:24px;
+    $scoreFont_medium:44px;
+    $scoreFont_large:60px;
+    $scoreFont_desktop:88px;
 
-.teamStats{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    margin: 0;
-    padding: 0;
-  
-    
-    #team1{
-        display:flex;
+
+    #home-nav{
+        display: flex;
+        justify-content: space-between;
+        height: 51px;
+        background-color: rgb(94, 15, 15);
+        width: 100vw;
         
-        .scores{
-            font-size: $scoreFont;
+        
+        .logo{
+            display: flex;
+            padding: 0;
+            margin: 0;
+            align-items: center;
         }
-        #add-team1-scores{
-
-
+        
+        ul{
+            display: flex;
+            list-style: none;
         }
+        
+        .login  {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0;
+            margin: 0;
+            width: 100px;
+            justify-content:start
+        }
+        
+        .register{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0;
+            margin: 0;
+            width: 100px;
+            justify-content: start
+        }
+    }
+    
 
-        #team1-score{
+
+.main{
+    font-size: $scoreFont_small;
+
+    #coach_info{
+        display: flex;
+        background-color: #747481;
+        font-size: 2em;
+        width: 100vw;
+        height: 50px;
+    }
+
+    .score_buttons{
+        display: flex;
+        justify-content: start;
+
+    }
+        
+        .team-one{
+            display:flex;
+            flex-direction: column;
+            width:100vw;
+            height: 40vh;
+
+            #teamOneScore{
+            }
             
-
+            
         }
         
-        background-color: blue;
-        
-        
+        .team-two{
+            display:flex;
+            flex-direction: column;
+            width:100vw;
+            height: 40vh;
+
+            #teamTwoScore{
+            }
+            
+        }
     }
     
-    #team2{
-        background-color: red;
-        
-    }
-}
-
-#home-nav{
-    display: flex;
-    justify-content: space-between;
-    height: 51px;
-    background-color: rgb(94, 15, 15);
-    width: 100vw;
-
-
-    .logo{
-        display: flex;
-        padding: 0;
-        margin: 0;
-        align-items: center;
-    }
-
-    ul{
-        display: flex;
-        list-style: none;
-    }
-
-    .login  {
-        display: flex;
-        align-items: center;
-       justify-content: space-between;
-       padding: 0;
-       margin: 0;
-       width: 100px;
-       justify-content: start
-       }
-
-       .register{
-        display: flex;
-        align-items: center;
-       justify-content: space-between;
-       padding: 0;
-       margin: 0;
-       width: 100px;
-       justify-content: start
-       }
-    
-
-}

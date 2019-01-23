@@ -31,6 +31,22 @@ module.exports = {
         res.status(200).send({ message: 'Logged In', userData: req.session.user, loggedIn: true })
     },
 
+    delete: async (req, res) => {
+        const { email, password } = req.params;
+        const db = req.app.get('db');
+        let deleteAcc = await db.find_coach({ email: email });
+        console.log(deleteAcc)
+        if (deleteAcc[0] === 0) {
+            return res.status(401).send({ message: 'No Account Found' })
+        } else {
+            const result = BC.compareSync(password, deleteAcc[0].hash_code);
+            if (result) {
+                db.delete_acc({ password: deleteAcc[0].hash_code })
+                res.status(202).send({ message: 'Account Deleted' })
+            }
+        }
+    },
+
     makeGame: async (req, res) => {
         const { gameName, teamName1, teamName2 } = req.body;
         const db = req.app.get('db');
@@ -40,13 +56,25 @@ module.exports = {
 
     },
 
+    storeCode: (req, res) => {
+        const { fieldCode } = req.body;
+        console.log(req.body.fieldCode)
+        req.session.code = { code: fieldCode };
+        res.status(200).send(req.session.code)
+    },
+
+    getCode: (req, res) => {
+
+        res.status(200).send(req.session.code)
+    },
+
 
     getGame: (req, res) => {
         console.log(req.session)
         res.status(200).send(req.session.game)
     },
 
-    userData: (req, res) => {
+    getUser: (req, res) => {
         if (req.session.user) {
             res.status(200).send(req.session.user)
         }
@@ -55,12 +83,12 @@ module.exports = {
 
     scoreKeeper: (req, res) => {
         const { teamOneScore, teamTwoScore } = req.params;
-        req.session.score = { teamOneScore:teamOneScore, teamTwoScore:teamTwoScore }
+        req.session.score = { teamOneScore: teamOneScore, teamTwoScore: teamTwoScore }
         console.log(req.params)
         res.status(200).send({ message: 'Score Saved', getScoreData: req.session.score })
     },
 
-    getScoreData: (req, res) => {
+    getScore: (req, res) => {
         res.status(200).send(req.session.score)
     },
 

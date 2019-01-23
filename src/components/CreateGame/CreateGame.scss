@@ -7,33 +7,41 @@ button{
 }
 #home-nav{
     display: flex;
-    align-items: center;
     justify-content: space-between;
     height: 51px;
     background-color: rgb(94, 15, 15);
     width: 100vw;
-    padding: 0;
-    margin: 0;
-  
-  
+    
+    
     .logo{
-  
+        display: flex;
+        padding: 0;
+        margin: 0;
         align-items: center;
     }
-  
+    
     ul{
+        display: flex;
         list-style: none;
     }
-  
-    .login  {
-       width: 100px;
-       justify-content: start
-       }
-  
-       .register{
-       width: 100px;
-       justify-content: start
-       }
     
-  
-  }
+    .login  {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0;
+        margin: 0;
+        width: 100px;
+        justify-content:start
+    }
+    
+    .register{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0;
+        margin: 0;
+        width: 100px;
+        justify-content: start
+    }
+}

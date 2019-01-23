@@ -45,9 +45,11 @@ export default class register extends Component {
     render() {
         return (
             <div className='register'>
+            <nav className='nav'>
                 <Link to='/'>
                 <img src={Logo} alt=''/>
                 </Link>
+            </nav>
                 <br />
                 <div>
                     <label for='username'>username</label>

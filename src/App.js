@@ -6,6 +6,8 @@ import './components/CreateGame/CreateGame.scss';
 import './components/Home/Home.scss';
 import './components/Login/Login.scss';
 import './components/Register/Register.scss';
+import './components/ClientWatch/ClientWatch.scss';
+import ClientWatch from './components/ClientWatch/ClientWatch';
 import WatchGame from './components/WatchGame/WatchGame';
 import CreateGame from './components/CreateGame/CreateGame';
 import Home from './components/Home/Home';
@@ -29,6 +31,7 @@ class App extends Component {
                 <Route path='/create' component={CreateGame} ></Route>
                 <Route path='/register' component={Register}></Route>
                 <Route path='/login' component={Login} ></Route>
+                <Route path='/clientWatch' component={ClientWatch}></Route>
               </Switch>
             </HashRouter>
           </div>

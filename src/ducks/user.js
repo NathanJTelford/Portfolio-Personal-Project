@@ -1,13 +1,17 @@
 const initialState = {
     user: {},
     game: {},
-    score: {teamOneScore:0,
-    teamTwoScore:0}
+    score: {
+        teamOneScore: 0,
+        teamTwoScore: 0
+    },
+    fieldCode: ''
 }
 
 const GET_USER_DATA = 'GET_USER_DATA';
 const GET_GAME_DATA = 'GET_GAME_DATA';
-const GET_SCORE_DATA = 'GET_SCORE_DATA'
+const GET_SCORE_DATA = 'GET_SCORE_DATA';
+const GET_FIELD_CODE = 'GET_FIELD_CODE'
 
 
 
@@ -32,6 +36,13 @@ export function getScoreData(scoreInfo) {
     }
 }
 
+export function getFieldCode(code) {
+    return {
+        type: GET_FIELD_CODE,
+        payload: code
+    }
+}
+
 
 
 export default function reducer(state = initialState, action) {
@@ -45,7 +56,10 @@ export default function reducer(state = initialState, action) {
             return { ...state, game: action.payload };
 
         case GET_SCORE_DATA:
-            return { ...state, score: action.payload }
+            return { ...state, score: action.payload };
+
+        case GET_FIELD_CODE:
+            return { ...state, fieldCode: action.payload }
 
 
 
