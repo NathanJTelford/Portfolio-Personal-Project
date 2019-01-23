@@ -89,6 +89,12 @@ module.exports = {
     },
 
     getScore: (req, res) => {
+        if(req.teamOneScore && req.teamTwoScore === NaN){
+           let teamOneScore=0; 
+           let teamTwoScore=0;
+            return res.status(200).send( teamOneScore, teamTwoScore)
+        }
+        else
         res.status(200).send(req.session.score)
     },
 

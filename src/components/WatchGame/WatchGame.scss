@@ -55,9 +55,24 @@
     #coach_info{
         display: flex;
         background-color: #747481;
-        font-size: 2em;
         width: 100vw;
-        height: 50px;
+        height: 77px;
+        #username{
+            background: transparent;
+
+    }
+    #pic{
+        position: relative;
+        display: flex;
+        flex-direction: flex-start;
+        width:40vw;
+
+        img{
+            width: 125px;
+            height: 71px;
+            z-index: 2;
+            }
+        }
     }
 
     .score_buttons{

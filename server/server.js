@@ -57,7 +57,7 @@ app.post('/auth/login', authCTRL.login);
 // save endpoints
 
 app.post('/makeGame', authCTRL.makeGame);
-app.post(`/scorekeeper/:?{teamOneScore}/?{teamTwoScore}`,authCTRL.scoreKeeper )
+app.post(`/scorekeeper/:{teamOneScore}/:{teamTwoScore}`,authCTRL.scoreKeeper )
 
 // display endpoints
 

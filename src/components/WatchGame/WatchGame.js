@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { getGameData, getScoreData, getFieldCode, getUserData } from './../../ducks/user';
 import { connect } from 'react-redux';
-import Logo from  './../../../src/LogoMakr_1vONm5.png';
+import Logo from './../../../src/LogoMakr_1vONm5.png';
 
 
 
@@ -16,32 +16,25 @@ class watchGame extends Component {
             gameName: '',
             teamName1: '',
             teamName2: '',
-            Score:'',
-            username:'',
-            pic:'',
-            code:''
-
+            username: '',
+            pic: '',
+            code: ''
 
         }
     }
 
     async componentDidMount() {
         try {
-            const res = await axios.all([axios.get('/getGame'), axios.get('/getUser'), axios.get('/getScore'), axios.get('/getCode')])
-            // this.props.getGameData(res.data);
-            // this.props.getUserData(res.data);
-            // this.props.getFieldCode(res.data);
-            // const { teamOneScore, teamTwoScore } = this.session.score;
-            // const { name, teamName1, teamName2 } = this.session.game;
-            const code = res[3].code.data
-            this.setState({code:code})
-            // const { username, pic } = this.session.user;
+            const res = await axios.all([axios.get('/getGame'), axios.get('/getUser'), axios.get('/getCode')])
+            this.setState({ gameName: res[0].data.name })
+            this.setState({ teamName1: res[0].data.teamName1 })
+            this.setState({ teamName2: res[0].data.teamName2 })
+            this.setState({ username: res[1].data.username })
+            this.setState({ pic: res[1].data.pic })
+            this.setState({ code: res[2].data.code })
+        }
 
-            // this.setState({ teamOneScore: teamOneScore, teamTwoScore: teamTwoScore, gameName: name, teamName1: teamName1, teamName2: teamName2, code:code, username: username, pic:pic })
-            console.log(this.props)
-
-        } catch (e) {
-            console.log('Game not found', e)
+        catch (e) {
         }
 
     }
@@ -92,48 +85,53 @@ class watchGame extends Component {
 
 
     render() {
-        console.log(this.state.code)
-        const { name, teamName1, teamName2, teamOneScore, teamTwoScore,  username, pic, code } = this.state;
+        const { name, teamName1, teamName2, teamOneScore, teamTwoScore, username, pic, code } = this.state;
         return (
             <div className='main'>
-                 <nav id='home-nav'>
-                <div className='logo'>
+                <nav id='home-nav'>
+                    <div className='logo'>
 
-                <Link to='/'>
-                <img src={Logo} alt=''/>
-                </Link>
+                        <Link to='/'>
+                            <img src={Logo} alt='' />
+                        </Link>
 
-                </div>
+                    </div>
                     <ul>
-                    <div className='login'>
-                        <Link to='/login'>
-                            <li href='/login'>Login</li>
-                        </Link>
-                    </div>
-                    <div className='register'>
-                        <Link to='/register'>
-                            <li>Register</li>
-                        </Link>
-                    </div>
+                        <div className='login'>
+                            <Link to='/login'>
+                                <li href='/login'>Login</li>
+                            </Link>
+                        </div>
+                        <div className='register'>
+                            <Link to='/register'>
+                                <li>Register</li>
+                            </Link>
+                        </div>
                     </ul>
                 </nav>
                 <div id='coach_info'>
-                <h2>{username}</h2>
-                <img src={pic}  alt=''/>
-                <p>FieldCode: {code}</p>
+                    <div id='pic'>
+                        <img src={pic} alt='' />
+                    </div>
+                    <div id='code'>
+                    <div id='username'>{username}</div>
+                        <p>FieldCode: {code}</p>
+                    </div>
                 </div>
-                <h1>{name}</h1>
+                <div id='gameName'>
+                    <h1>{name}</h1>
+                </div>
 
                 <div className='team-one'>
                     <div>{teamName1}</div>
                     <div className='score_buttons'>
-                    <button onClick={() => this.handlePointOneT1()} >1 Point</button>
-                    
-                    <button onClick={() => this.handlePointTwoT1()} >2 Points</button>
-                    
-                    <button onClick={() => this.handlePointThreeT1()} >3 Points</button>
-                    <div id='teamOneScore'>
-                    </div>
+                        <button onClick={() => this.handlePointOneT1()} >1 Point</button>
+
+                        <button onClick={() => this.handlePointTwoT1()} >2 Points</button>
+
+                        <button onClick={() => this.handlePointThreeT1()} >3 Points</button>
+                        <div id='teamOneScore'>
+                        </div>
                         {teamOneScore}
                     </div>
                 </div>
@@ -141,11 +139,11 @@ class watchGame extends Component {
                 <div className='team-two'>
                     <div>{teamName2}</div>
                     <div className='score_buttons'>
-                    <button onClick={() => this.handlePointOneT2()} >1 Point</button>
-                    
-                    <button onClick={() => this.handlePointTwoT2()} >2 Points</button>
-                    
-                    <button onClick={() => this.handlePointThreeT2()} >3 Points</button>
+                        <button onClick={() => this.handlePointOneT2()} >1 Point</button>
+
+                        <button onClick={() => this.handlePointTwoT2()} >2 Points</button>
+
+                        <button onClick={() => this.handlePointThreeT2()} >3 Points</button>
                     </div>
                     <div id='teamTwoScore'>
                         {teamTwoScore}
