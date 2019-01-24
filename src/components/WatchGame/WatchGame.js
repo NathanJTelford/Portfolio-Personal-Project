@@ -114,7 +114,7 @@ class watchGame extends Component {
                         <img src={pic} alt='' />
                     </div>
                     <div id='code'>
-                    <div id='username'>{username}</div>
+                    <h2 id='username'>{username}</h2>
                         <p>FieldCode: {code}</p>
                     </div>
                 </div>
@@ -130,10 +130,11 @@ class watchGame extends Component {
                         <button onClick={() => this.handlePointTwoT1()} >2 Points</button>
 
                         <button onClick={() => this.handlePointThreeT1()} >3 Points</button>
-                        <div id='teamOneScore'>
-                        </div>
-                        {teamOneScore}
+                       
                     </div>
+                    <div id='teamOneScore'>
+                        {teamOneScore}
+                        </div>
                 </div>
                 <br />
                 <div className='team-two'>

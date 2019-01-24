@@ -3,17 +3,19 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Logo from './../../../src/LogoMakr_1vONm5.png';
 import { connect } from 'react-redux';
-import { getUserData } from './../../ducks/user'
+import { getUserData, getEmail, getPassword } from './../../ducks/user'
 import Modal from './Modal';
+import EditModal from './EditModal';
 
 
 class login extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             email: '',
             password: '',
-            show: false
+            show: false,
+            showEdit: false
         }
 
     }
@@ -27,22 +29,33 @@ class login extends Component {
     }
 
 
+    showEditModal = () => {
+        this.setState({ showEdit: true })
+    }
+
+    hidEditModal = () => {
+        this.setState({ showEdit: false })
+    }
+
+
 
     async handleLogin() {
-        const { email, password } = this.state;
-        let res = await axios.post('/auth/login', { email: email, password: password })
-        this.props.getUserData(res.data);
+        let res = await axios.post('/auth/login', { email: this.state.email, password:this.state.password})
         if (res.data.loggedIn) {
             this.props.history.push('/')
         }
     }
 
-     deleteAccount = async () => {
+    deleteAccount = async () => {
         await axios.delete(`/auth/delete/${this.state.email}/${this.state.password}`)
         alert('Account Deleted')
         this.props.history.push('/')
     }
 
+    handleEdit(email,username,pic,pass,id){
+        axios.put(`/auth/edit/${email}/${username}/${pic}/${pass}/${id}`)
+        
+    }
 
 
 
@@ -55,8 +68,11 @@ class login extends Component {
                     <Link to='/'>
                         <img src={Logo} alt='' />
                     </Link>
+                    <div id='edit'>
+                        <button className='editButton' onClick={() => {this.showEditModal()}}>Edit Account</button>
+                    </div>
                 </nav>
-                <h1>Log In</h1>
+                <h1 className='top'>Log In</h1>
                 <br />
                 <p>Email</p>
                 <br />
@@ -70,13 +86,20 @@ class login extends Component {
                 <br />
                 <Modal show={this.state.show} handleClose={this.hidModal} deleteAccount={this.deleteAccount}>
                 </Modal>
+               {
+                   this.state.showEdit ? 
+                   <EditModal showEdit={this.state.showEdit} closeEdit={this.hidEditModal} email={this.state.email} password={this.state.password} editAccount={this.handleEdit}>
+                </EditModal>
+                : null
+               }
+                   
                 <br />
                 <p>delete account</p>
                 <p>Email</p>
                 <input onChange={(e) => this.setState({ email: e.target.value })} />
                 <p>Password</p>
                 <input onChange={(e) => this.setState({ password: e.target.value })} type='password' />
-                <br/>
+                <br />
                 <button onClick={() => this.showModal()}>Delete</button>
 
             </div>
@@ -85,4 +108,4 @@ class login extends Component {
 }
 
 const mapState = (reduxState) => reduxState;
-export default connect(mapState, { getUserData })(login)
+export default connect(mapState, { getUserData, getEmail, getPassword })(login)

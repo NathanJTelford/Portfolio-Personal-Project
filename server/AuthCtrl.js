@@ -27,7 +27,7 @@ module.exports = {
             const result = BC.compareSync(password, loginArray[0].hash_code)
             if (!result) { return res.status(200).send({ message: 'Incorrect Password' }) }
         }
-        req.session.user = { id: loginArray[0].coach_id, username: loginArray[0].username, email: loginArray[0].email, pic: loginArray[0].pic }
+        req.session.user = { id: loginArray[0].coach_id, username: loginArray[0].username, password: loginArray[0].hash_code, email: loginArray[0].email, pic: loginArray[0].pic }
         res.status(200).send({ message: 'Logged In', userData: req.session.user, loggedIn: true })
     },
 
@@ -45,58 +45,31 @@ module.exports = {
                 res.status(202).send({ message: 'Account Deleted' })
             }
         }
+
     },
 
-    makeGame: async (req, res) => {
-        const { gameName, teamName1, teamName2 } = req.body;
+    edit: async (req,res)=>{
+        const { id, email, username, pic, pass} = req.params;
         const db = req.app.get('db');
-        await db.make_game({ name: gameName, teamName1: teamName1, teamName2: teamName2 })
-        req.session.game = { name: gameName, teamName1: teamName1, teamName2: teamName2 }
-        res.status(200).send(req.session.game)
+            const salt = BC.genSaltSync(10);
+            const hash = BC.hashSync(pass, salt);
+           const editedCoach = await  db.edit_coach({email:email, username: username, pic:pic, pass:hash, id:id})
+           console.log(editedCoach)
+           req.session.editedUser = { id: editedCoach[0].coach_id, username: editedCoach[0].username, password: editedCoach[0].hash_code, email: editedCoach[0].email, pic: editedCoach[0].pic }
+        
 
+        res.status(201).send({message:'Update Successful', userData: req.session.user, edited: true})
+        
     },
 
-    storeCode: (req, res) => {
-        const { fieldCode } = req.body;
-        console.log(req.body.fieldCode)
-        req.session.code = { code: fieldCode };
-        res.status(200).send(req.session.code)
-    },
-
-    getCode: (req, res) => {
-
-        res.status(200).send(req.session.code)
-    },
-
-
-    getGame: (req, res) => {
-        console.log(req.session)
-        res.status(200).send(req.session.game)
-    },
-
-    getUser: (req, res) => {
-        if (req.session.user) {
-            res.status(200).send(req.session.user)
+    authCode: (req, res) => {
+        const { fieldCode } = req.params;
+        if (fieldCode === req.session.code) {
+            return true
         }
-        else { res.status(401).send({ message: 'Please Log In' }) }
-    },
+        console.log(req.session.authCode)
+    }
 
-    scoreKeeper: (req, res) => {
-        const { teamOneScore, teamTwoScore } = req.params;
-        req.session.score = { teamOneScore: teamOneScore, teamTwoScore: teamTwoScore }
-        console.log(req.params)
-        res.status(200).send({ message: 'Score Saved', getScoreData: req.session.score })
-    },
-
-    getScore: (req, res) => {
-        if(req.teamOneScore && req.teamTwoScore === NaN){
-           let teamOneScore=0; 
-           let teamTwoScore=0;
-            return res.status(200).send( teamOneScore, teamTwoScore)
-        }
-        else
-        res.status(200).send(req.session.score)
-    },
 
 
 }
@@ -112,3 +85,9 @@ module.exports = {
 //     }
 //     res.status(200).send({message:'Save Successful'}).catch(error=>{console.log(error)})
 // },
+
+// const result = await BC.compareSync({pass, password})
+// if(pass === result){
+//     db.minor_edit({email:email, username: username, pic:pic, id:id })
+// }
+// else

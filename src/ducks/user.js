@@ -1,5 +1,6 @@
 const initialState = {
-    user: {},
+    email: '',
+    password: '',
     game: {},
     score: {
         teamOneScore: 0,
@@ -11,7 +12,9 @@ const initialState = {
 const GET_USER_DATA = 'GET_USER_DATA';
 const GET_GAME_DATA = 'GET_GAME_DATA';
 const GET_SCORE_DATA = 'GET_SCORE_DATA';
-const GET_FIELD_CODE = 'GET_FIELD_CODE'
+const GET_FIELD_CODE = 'GET_FIELD_CODE';
+const GET_EMAIL = 'GET_EMAIL';
+const GET_PASSWORD = 'GET_PASSWORD'
 
 
 
@@ -43,11 +46,23 @@ export function getFieldCode(code) {
     }
 }
 
+export function getEmail(email) {
+    return {
+        type: GET_EMAIL,
+        payload: email
+    }
+}
+
+export function getPassword(password) {
+    return {
+        type: GET_PASSWORD,
+        payload: password
+    }
+}
+
 
 
 export default function reducer(state = initialState, action) {
-    console.log('reducer', action.payload)
-
     switch (action.type) {
         case GET_USER_DATA:
             return { ...state, user: action.payload };
@@ -59,7 +74,13 @@ export default function reducer(state = initialState, action) {
             return { ...state, score: action.payload };
 
         case GET_FIELD_CODE:
-            return { ...state, fieldCode: action.payload }
+            return { ...state, fieldCode: action.payload };
+
+        case GET_EMAIL:
+            return { ...state, email: action.payload };
+
+        case GET_PASSWORD:
+            return { ...state, password: action.payload }
 
 
 

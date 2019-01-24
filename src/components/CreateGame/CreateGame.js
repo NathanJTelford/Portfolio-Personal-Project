@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Logo from './../../../src/LogoMakr_1vONm5.png';
-import io from 'socket.io-client';
+// import io from 'socket.io-client';
 import { connect } from 'react-redux';
 import { getFieldCode } from './../../ducks/user'
 
@@ -32,7 +32,6 @@ class creatGame extends Component {
         await axios.post('/storeCode',{fieldCode: fieldCode} )
         }
         
-        console.log(randomCode)
         this.props.getFieldCode(randomCode)
     }
 

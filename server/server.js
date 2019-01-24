@@ -3,7 +3,9 @@ const express = require('express');
 const massive = require('massive');
 const session = require('express-session');
 const authCTRL = require('./AuthCtrl');
+const gameCtrl = require('./gameCtrl');
 const socket = require('socket.io');
+// const ioCtrl = require('./ioCtrl');
 
 
 
@@ -30,9 +32,9 @@ const io = socket(app.listen(SERVER_PORT, () => { console.log('Battle Cruiser Op
 // app.use(express.static('./public'));
 
 // sockets
-io.on('connection', socket =>{
+io.on('connection', socket => {
     console.log('socket connected')
-    socket.on('emit message to general', data=>{
+    socket.on('emit message to general', data => {
         console.log('test endpoint hit: emit');
         sockets.emit('generate general response', data)
     })
@@ -40,7 +42,7 @@ io.on('connection', socket =>{
         console.log('general socket hit: blast')
         io.sockets.emit('generate general response', data);
     });
-    
+
 })
 
 
@@ -53,37 +55,30 @@ io.on('connection', socket =>{
 // login/auth
 app.post('/auth/register', authCTRL.register);
 app.post('/auth/login', authCTRL.login);
+app.post(`/auth/code/:fieldCode`, authCTRL.authCode);
+// app.put(`/auth/edit/:email/:password`, authCTRL.edit)
 
 // save endpoints
 
-app.post('/makeGame', authCTRL.makeGame);
-app.post(`/scorekeeper/:{teamOneScore}/:{teamTwoScore}`,authCTRL.scoreKeeper )
+app.post('/makeGame', gameCtrl.makeGame);
+app.post(`/scorekeeper/:teamOneScore/:teamTwoScore`, gameCtrl.scoreKeeper)
 
 // display endpoints
 
-app.get('/getGame', authCTRL.getGame);
-app.get('/getScore', authCTRL.getScore);
-app.get('/getUser', authCTRL.getUser);
-app.get('/getCode', authCTRL.getCode);
+app.get('/getGame', gameCtrl.getGame);
+app.get('/getScore', gameCtrl.getScore);
+app.get('/getUser', gameCtrl.getUser);
+app.get('/getCode', gameCtrl.getCode);
 
-app.post('/storeCode', authCTRL.storeCode);
+app.post('/storeCode', gameCtrl.storeCode);
 
-// logout
+// logout/delete/edit
 
 app.delete(`/auth/delete/:email/:password`, authCTRL.delete)
-
-app.get('/auth/logout', (req,res)=>{
+app.put(`/auth/edit/:email/:username/:pic/:pass/:id`, authCTRL.edit)
+app.get('/auth/logout', (req, res) => {
     req.session.destroy();
     res.redirect('http://localhost:3000/#/');
-})
-
-// test endpoints need to be deleted (eventually)
-
-app.get('/test', async (req,res)=>{
-    const db = app.get('db');
-  const reply = await db.test()
-  console.log(reply);
-  res.sendStatus(200)
 })
 
 

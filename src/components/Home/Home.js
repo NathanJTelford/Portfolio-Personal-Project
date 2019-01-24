@@ -1,51 +1,38 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Logo from './../../../src/LogoMakr_1vONm5.png';
-import Axios from 'axios';
-import io from 'socket.io-client';
+import axios from 'axios';
+// import clientWatch from './../ClientWatch/ClientWatch';
 
 class Home extends Component {
     constructor() {
         super()
         this.state = {
-            fieldCode: '',
-            message: '',
-            messages:[]
+            fieldCode: [],
+            code: '',
         }
-        this.socket = io.connect(':4040');
-        this.socket.on('generate general response', data => this.handleResponse(data))
     }
 
-    handleTest( message) {
-        this.socket.emit(`blast message to general`, { message })
+    sendCode = async () => {
+        this.setState({ fieldCode:[...this.state.fieldCode, this.state.code], code: ''})
+       let res = await axios.post(`/auth/code/${this.state.fieldCode}`)
+        if( res === true){this.props.history.push('/clientWatch')}
+        else alert('Incorrect Code, Please Try Again')
+        
+        
     }
-
-    handleResponse(data) {
-        console.log(data)
-        this.setState({messages: [...this.state.messages, data.message ]})
-    }
-
-
-    // watchGame(){
-    //     let code = this.props;
-    //     if(code === this.state.fieldCode){
-    //         this.socket.emit('join room', { room: this.state.fieldCode })
-    //     }else { alert('Wrong code, please try again')}
-    // }
 
 
 
     handleCode(val) {
         this.setState({
-            fieldCode: val
+            code: val
         })
+
     }
 
 
     render() {
-        const messages = this.state.messages.map(message => {
-            return <p>{message}</p>;
-          });
         return (
             <div className='main'>
                 <nav id='home-nav'>
@@ -71,15 +58,12 @@ class Home extends Component {
                 </nav>
                 <div id='welcome'>
                     <h1>Welcome!</h1>
-                    <button onClick={() => this.handleTest(this.state.message)}>Test Socket</button>
-                    {messages}
-                    <input onChange={(e) => this.setState({ message: e.target.value })} />
                     <br />
                     <p> Let's get started. to start watching the score enter your 4 character field code here.</p>
                     <br />
                     <input type='text' placeholder='Field Code' onChange={(e) => { this.handleCode(e.target.value) }} />
                     <br />
-                    <button onClick={() => this.props.history.push('/clientWatch')}>Watch Game</button>
+                    <button onClick={() => this.sendCode(this.state.code)}>Watch Game</button>
                 </div>
                 <div id='make_game'>
                     <p>Login or register to save your customized games!</p>
