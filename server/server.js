@@ -21,6 +21,7 @@ app.use(session({
     saveUninitialized: false
 }))
 
+app.use( express.static( `${__dirname}/../build` ) );
 
 
 
@@ -30,7 +31,6 @@ massive(CONNECTION_STRING).then(dbInstance => {
 
 const io = socket(app.listen(SERVER_PORT, () => { console.log('Battle Cruiser Operational') }));
 
-// app.use(express.static('./public'));
 
 // sockets
 io.on('connection', socket => {
@@ -78,7 +78,7 @@ app.delete(`/auth/delete/:email/:password`, authCTRL.delete)
 app.put(`/auth/edit`, authCTRL.edit)
 app.get('/auth/logout', (req, res) => {
     req.session.destroy();
-    res.redirect('http://localhost:3000/#/');
+    res.redirect('/');
 })
 
 
