@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { getGameData, getScoreData, getFieldCode, getUserData } from './../../ducks/user';
+import { teamOneScore, teamTwoScore } from './../../ducks/user';
 import { connect } from 'react-redux';
 import Logo from './../../../src/LogoMakr_1vONm5.png';
 
@@ -39,44 +39,50 @@ class watchGame extends Component {
 
     }
 
-    handlePointOneT1() {
+      handlePointOneT1 = async () => {
         let newScore = this.state.teamOneScore;
         newScore = newScore + 1
-        this.setState({ teamOneScore: newScore })
+        await this.setState({ teamOneScore: newScore })
+        this.props.teamOneScore(this.state.teamOneScore)
     }
 
-    handlePointTwoT1() {
+      handlePointTwoT1 = async () => {
         let newScore = this.state.teamOneScore;
         newScore = newScore + 2
-        this.setState({ teamOneScore: newScore })
+        await this.setState({ teamOneScore: newScore })
+        this.props.teamOneScore(this.state.teamOneScore)
 
     }
 
-    handlePointThreeT1() {
+      handlePointThreeT1 = async () => {
         let newScore = this.state.teamOneScore;
         newScore = newScore + 3
-        this.setState({ teamOneScore: newScore })
+        await this.setState({ teamOneScore: newScore })
+        this.props.teamOneScore(this.state.teamOneScore)
 
     }
 
-    handlePointOneT2() {
+      handlePointOneT2 = async () => {
         let newScore = this.state.teamTwoScore;
         newScore = newScore + 1
-        this.setState({ teamTwoScore: newScore })
+        await this.setState({ teamTwoScore: newScore })
+        this.props.teamTwoScore(this.state.teamTwoScore)
 
     }
 
-    handlePointTwoT2() {
+      handlePointTwoT2 = async () => {
         let newScore = this.state.teamTwoScore;
         newScore = newScore + 2
-        this.setState({ teamTwoScore: newScore })
+        await this.setState({ teamTwoScore: newScore })
+        this.props.teamTwoScore(this.state.teamTwoScore)
 
     }
 
-    handlePointThreeT2() {
+      handlePointThreeT2 = async () => {
         let newScore = this.state.teamTwoScore;
         newScore = newScore + 3
-        this.setState({ teamTwoScore: newScore })
+        await this.setState({ teamTwoScore: newScore })
+        this.props.teamTwoScore(this.state.teamTwoScore)
 
     }
 
@@ -114,7 +120,7 @@ class watchGame extends Component {
                         <img src={pic} alt='' />
                     </div>
                     <div id='code'>
-                    <h2 id='username'>{username}</h2>
+                        <h2 id='username'>{username}</h2>
                         <p>FieldCode: {code}</p>
                     </div>
                 </div>
@@ -130,11 +136,11 @@ class watchGame extends Component {
                         <button onClick={() => this.handlePointTwoT1()} >2 Points</button>
 
                         <button onClick={() => this.handlePointThreeT1()} >3 Points</button>
-                       
+
                     </div>
                     <div id='teamOneScore'>
                         {teamOneScore}
-                        </div>
+                    </div>
                 </div>
                 <br />
                 <div className='team-two'>
@@ -157,4 +163,4 @@ class watchGame extends Component {
 }
 
 const mapState = (reduxState) => reduxState;
-export default connect(mapState, { getGameData, getScoreData, getFieldCode, getUserData })(watchGame)
+export default connect(mapState, { teamOneScore, teamTwoScore })(watchGame)

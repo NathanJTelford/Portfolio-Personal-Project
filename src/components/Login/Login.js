@@ -40,7 +40,7 @@ class login extends Component {
 
 
     async handleLogin() {
-        let res = await axios.post('/auth/login', { email: this.state.email, password:this.state.password})
+        let res = await axios.post('/auth/login', { email: this.state.email, password: this.state.password })
         if (res.data.loggedIn) {
             this.props.history.push('/')
         }
@@ -52,9 +52,11 @@ class login extends Component {
         this.props.history.push('/')
     }
 
-    handleEdit(email,username,pic,pass,id){
-        axios.put(`/auth/edit/${email}/${username}/${pic}/${pass}/${id}`)
-        
+    handleEdit = async (email, username, pic, pass, id) => {
+        await axios.put(`/auth/edit/`, { email: email, username: username, pic: pic, pass: pass, id: id })
+        await this.setState({ showEdit: false })
+        alert("Account Updated")
+
     }
 
 
@@ -69,7 +71,7 @@ class login extends Component {
                         <img src={Logo} alt='' />
                     </Link>
                     <div id='edit'>
-                        <button className='editButton' onClick={() => {this.showEditModal()}}>Edit Account</button>
+                        <button className='editButton' onClick={() => { this.showEditModal() }}>Edit Account</button>
                     </div>
                 </nav>
                 <h1 className='top'>Log In</h1>
@@ -86,13 +88,13 @@ class login extends Component {
                 <br />
                 <Modal show={this.state.show} handleClose={this.hidModal} deleteAccount={this.deleteAccount}>
                 </Modal>
-               {
-                   this.state.showEdit ? 
-                   <EditModal showEdit={this.state.showEdit} closeEdit={this.hidEditModal} email={this.state.email} password={this.state.password} editAccount={this.handleEdit}>
-                </EditModal>
-                : null
-               }
-                   
+                {
+                    this.state.showEdit ?
+                        <EditModal showEdit={this.state.showEdit} closeEdit={this.hidEditModal} email={this.state.email} password={this.state.password} editAccount={this.handleEdit}>
+                        </EditModal>
+                        : null
+                }
+
                 <br />
                 <p>delete account</p>
                 <p>Email</p>

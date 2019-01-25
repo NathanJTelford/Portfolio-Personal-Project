@@ -35,7 +35,6 @@ module.exports = {
         const { email, password } = req.params;
         const db = req.app.get('db');
         let deleteAcc = await db.find_coach({ email: email });
-        console.log(deleteAcc)
         if (deleteAcc[0] === 0) {
             return res.status(401).send({ message: 'No Account Found' })
         } else {
@@ -49,14 +48,13 @@ module.exports = {
     },
 
     edit: async (req,res)=>{
-        const { id, email, username, pic, pass} = req.params;
+        const { id, email, username, pic, pass} = req.body;
         const db = req.app.get('db');
             const salt = BC.genSaltSync(10);
             const hash = BC.hashSync(pass, salt);
            const editedCoach = await  db.edit_coach({email:email, username: username, pic:pic, pass:hash, id:id})
-           console.log(editedCoach)
-           req.session.editedUser = { id: editedCoach[0].coach_id, username: editedCoach[0].username, password: editedCoach[0].hash_code, email: editedCoach[0].email, pic: editedCoach[0].pic }
-        
+           req.session.updatedUser = { id: editedCoach[0].coach_id, username: editedCoach[0].username, password: editedCoach[0].hash_code, email: editedCoach[0].email, pic: editedCoach[0].pic }
+            req.session.user = req.session.updatedUser;
 
         res.status(201).send({message:'Update Successful', userData: req.session.user, edited: true})
         
@@ -67,27 +65,8 @@ module.exports = {
         if (fieldCode === req.session.code) {
             return true
         }
-        console.log(req.session.authCode)
     }
 
 
 
 }
-
-// saveGame: async (req, res) => {
-//     const {  updateGameName, updateTeamName1, updateTeamName2, updateConcatPoints, updateNumOfPeriods } = this.props;
-//     const { email } = req.session.user;
-//     const db = req.app.get('db');
-//     let saveLock = await db.find_coach({ email: email });
-//     if (!saveLock) {
-//         return res.status(200).send({ message: 'Please Log In To Save A Game' })
-//     } else { await db.saveGame(updateGameName, updateTeamName1, updateTeamName2, updateConcatPoints, updateNumOfPeriods)
-//     }
-//     res.status(200).send({message:'Save Successful'}).catch(error=>{console.log(error)})
-// },
-
-// const result = await BC.compareSync({pass, password})
-// if(pass === result){
-//     db.minor_edit({email:email, username: username, pic:pic, id:id })
-// }
-// else

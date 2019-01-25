@@ -12,19 +12,17 @@ module.exports={
 
     storeCode: (req, res) => {
         const { fieldCode } = req.body;
-        console.log(req.body.fieldCode)
         req.session.code = { code: fieldCode };
         res.status(200).send(req.session.code)
     },
 
     getCode: (req, res) => {
-
-        res.status(200).send(req.session.code)
+        if(!req.session.code){return res.status(404).send({message:'Incorrect Code'})}
+        else{res.status(200).send(req.session.code)}
     },
 
 
     getGame: (req, res) => {
-        console.log(req.session)
         res.status(200).send(req.session.game)
     },
 
@@ -38,7 +36,6 @@ module.exports={
     scoreKeeper: (req, res) => {
         const { teamOneScore, teamTwoScore } = req.params;
         req.session.score = { teamOneScore: teamOneScore, teamTwoScore: teamTwoScore }
-        console.log(req.params)
         res.status(200).send({ message: 'Score Saved', getScoreData: req.session.score })
     },
 

@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-// import { getGameData, getScoreData } from './../../ducks/user';
-// import { connect } from 'react-redux';
+import { teamOneScore, teamTwoScore } from './../../ducks/user';
+import { connect } from 'react-redux';
 import Logo from './../../../src/LogoMakr_1vONm5.png';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 // import io from 'socket.io-client';
 
 
- export default class clientWatch extends Component {
+class clientWatch extends Component {
     constructor() {
         super()
         this.state = {
@@ -25,6 +25,7 @@ import axios from 'axios';
 
     async componentDidMount() {
         try {
+            const { teamOneScore, teamTwoScore } = this.props;
             const res = await axios.all([axios.get('/getGame'), axios.get('/getUser'), axios.get('/getCode')])
             this.setState({ gameName: res[0].data.name })
             this.setState({ teamName1: res[0].data.teamName1 })
@@ -32,6 +33,7 @@ import axios from 'axios';
             this.setState({ username: res[1].data.username })
             this.setState({ pic: res[1].data.pic })
             this.setState({ code: res[2].data.code })
+            this.setState({teamOneScore:teamOneScore, teamTwoScore,teamTwoScore})
         }
 
         catch (e) {
@@ -42,7 +44,8 @@ import axios from 'axios';
 
 
     render() {
-        const { name, teamName1, teamName2, teamOneScore, teamTwoScore, username, pic, code } = this.state;
+        console.log(this.state)
+        const { name, teamName1, teamName2, username, pic, code, teamOneScore, teamTwoScore } = this.state;
         return (
             <div className='main'>
                 <nav id='home-nav'>
@@ -71,7 +74,7 @@ import axios from 'axios';
                         <img src={pic} alt='' />
                     </div>
                     <div id='code'>
-                    <h2 id='username'>{username}</h2>
+                        <h2 id='username'>{username}</h2>
                         <p>FieldCode: {code}</p>
                     </div>
                 </div>
@@ -83,7 +86,7 @@ import axios from 'axios';
                     <div>{teamName1}</div>
                     <div id='teamOneScore'>
                         {teamOneScore}
-                        </div>
+                    </div>
                 </div>
                 <br />
                 <div className='team-two'>
@@ -97,3 +100,6 @@ import axios from 'axios';
         )
     }
 }
+
+const mapState = (reduxState) => reduxState;
+export default connect(mapState, { teamOneScore, teamTwoScore })(clientWatch)

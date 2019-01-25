@@ -1,3 +1,4 @@
+
 require('dotenv').config();
 const express = require('express');
 const massive = require('massive');
@@ -69,13 +70,12 @@ app.get('/getGame', gameCtrl.getGame);
 app.get('/getScore', gameCtrl.getScore);
 app.get('/getUser', gameCtrl.getUser);
 app.get('/getCode', gameCtrl.getCode);
-
 app.post('/storeCode', gameCtrl.storeCode);
 
 // logout/delete/edit
 
 app.delete(`/auth/delete/:email/:password`, authCTRL.delete)
-app.put(`/auth/edit/:email/:username/:pic/:pass/:id`, authCTRL.edit)
+app.put(`/auth/edit`, authCTRL.edit)
 app.get('/auth/logout', (req, res) => {
     req.session.destroy();
     res.redirect('http://localhost:3000/#/');

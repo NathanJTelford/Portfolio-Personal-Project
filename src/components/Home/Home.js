@@ -14,12 +14,18 @@ class Home extends Component {
     }
 
     sendCode = async () => {
-        this.setState({ fieldCode:[...this.state.fieldCode, this.state.code], code: ''})
-       let res = await axios.post(`/auth/code/${this.state.fieldCode}`)
-        if( res === true){this.props.history.push('/clientWatch')}
-        else alert('Incorrect Code, Please Try Again')
-        
-        
+        let response = await axios.get('/getCode');
+        if(this.state.code !== response){
+            alert('Wrong Code, Please Try Again')
+        }
+        else{
+            this.props.push('/clientWatch')
+        }
+
+    }
+
+    logout(){
+        axios.get('/auth/logout')
     }
 
 
@@ -44,6 +50,7 @@ class Home extends Component {
 
                     </div>
                     <ul>
+                        <button onClick={()=>this.logout()}>logout</button>
                         <div className='login'>
                             <Link to='/login'>
                                 <li href='/login'>Login</li>

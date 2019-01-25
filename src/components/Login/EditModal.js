@@ -28,7 +28,6 @@ export default class EditModal extends Component {
     }
 
     showEdit = async () => {
-        console.log(this.state)
         let res = await axios.get('/getUser');
         this.setState({ email: res.data.email, username: res.data.username, pic: res.data.pic, id: res.data.id })
     }
@@ -67,7 +66,7 @@ export default class EditModal extends Component {
                             <input onChange={(e) => this.setState({ newPass: e.target.value })} />
 
                             <div className='edit-modal-button'>
-                                <button onClick={() => editAccount(this.state.email, this.state.username, this.state.Pic, this.state.newPass, this.state.id)}>Send</button>
+                                <button onClick={() => editAccount(this.state.email, this.state.username, this.state.pic, this.state.newPass, this.state.id)}>Send</button>
                                 <button onClick={closeEdit}>Cancel</button>
                             </div>
                         </div>
