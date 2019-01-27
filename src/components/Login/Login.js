@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { getUserData, getEmail, getPassword } from './../../ducks/user'
 import Modal from './Modal';
 import EditModal from './EditModal';
+import Nav from './../Nav/Nav'
 
 
 class login extends Component {
@@ -66,19 +67,10 @@ class login extends Component {
     render() {
         return (
             <div className='main'>
-                <nav className='nav'>
-                    <Link to='/'>
-                        <img src={Logo} alt='' />
-                    </Link>
-                    <div id='edit'>
-                        <button className='editButton' onClick={() => { this.showEditModal() }}>Edit Account</button>
-                    </div>
-                </nav>
-                <h1 className='top'>Log In</h1>
-                <br />
+            <Nav/>
                 <p>Email</p>
                 <br />
-                <input onChange={(e) => this.setState({ email: e.target.value })} name='email' id='email' />
+                <input onChange={(e) => this.setState({ email: e.target.value })} />
                 <br />
                 <p>Password</p>
                 <br />
@@ -96,13 +88,16 @@ class login extends Component {
                 }
 
                 <br />
-                <p>delete account</p>
+                <p>Delete or edit account</p>
                 <p>Email</p>
                 <input onChange={(e) => this.setState({ email: e.target.value })} />
                 <p>Password</p>
                 <input onChange={(e) => this.setState({ password: e.target.value })} type='password' />
                 <br />
+                <div className='edit-delete'>
+                <button onClick={()=>this.showEditModal()}>Edit</button>
                 <button onClick={() => this.showModal()}>Delete</button>
+                </div>
 
             </div>
         )

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Logo from  './../../../src/LogoMakr_1vONm5.png';
+import Nav from './../Nav/Nav';
 
 export default class register extends Component {
     constructor() {
@@ -45,11 +46,7 @@ export default class register extends Component {
     render() {
         return (
             <div className='register'>
-            <nav className='nav'>
-                <Link to='/'>
-                <img src={Logo} alt=''/>
-                </Link>
-            </nav>
+                <Nav/>
                 <br />
                 <div>
                     <label for='username'>username</label>

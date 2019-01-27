@@ -5,6 +5,7 @@ import Logo from './../../../src/LogoMakr_1vONm5.png';
 // import io from 'socket.io-client';
 import { connect } from 'react-redux';
 import { getFieldCode } from './../../ducks/user'
+import Nav from './../Nav/Nav';
 
 
 class creatGame extends Component {
@@ -49,27 +50,7 @@ class creatGame extends Component {
     render() {
         return (
             <div>
-                <nav id='home-nav'>
-                    <div className='logo'>
-
-                        <Link to='/'>
-                            <img src={Logo} alt='' />
-                        </Link>
-
-                    </div>
-                    <ul>
-                        <div className='login'>
-                            <Link to='/login'>
-                                <li href='/login'>Login</li>
-                            </Link>
-                        </div>
-                        <div className='register'>
-                            <Link to='/register'>
-                                <li>Register</li>
-                            </Link>
-                        </div>
-                    </ul>
-                </nav>
+                    <Nav/>
 
                 <div id='game-name'>
                     <h3>Game Name</h3>

@@ -1,12 +1,5 @@
-//  *{
-//  -webkit-box-sizing: border-box;
-//  -moz-box-sizing: border-box;
-//  box-sizing: border-box;
 
-// }
-
-
-
+// background for entire app.
 
 .App{
   width:100vw;
@@ -15,59 +8,120 @@
   justify-content: center;
   background-size: 100vw 100vh;
   background-attachment: fixed;
-  background-image: linear-gradient(to bottom, rgba(103, 144, 172, 0.5), rgba(53, 53, 77, 0.5)),
-  url({process.env.BACKGROUND_PIC});
+  background-image: linear-gradient(to bottom, rgba(82, 99, 110, 0.5), rgba(136, 156, 161, 0.5)),
+  url('http://getwallpapers.com/wallpaper/full/a/3/2/835638-free-download-chrome-backgrounds-2560x1440.jpg');
 
   .super-background{
 
     background-size: 100vw 100vh;
-    background-image: url({process.env.BACKGROUND_COLOR});
+    background-image: url('https://png.pngtree.com/thumb_back/fw800/back_pic/04/15/61/975822e56aed9ad.JPG');
     z-index: 2;
   }
     
-  
-
-
-  .background{
-    z-index: 5;
-  background-color: rgba(158, 154, 154, 0.829);
-    opacity: .40;
-  }
 }
 
-#home-nav{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 51px;
-  background-color: rgb(94, 15, 15);
-  width: 100vw;
-  padding: 0;
-  margin: 0;
+// text mods;
+
+$font-small: 1.3rem;
+$font-medium: 3rem;
+$font-large: 5rem;
+$padding-small: 5px;
+$padding-medium: 10px;
 
 
-  img{
-
-    align-items: center;
-    height: 35px;
-    width: 140px;
+.App{
+  p {
+    font-size: $font-small;
+    text-align: center;
+    padding: $padding-small;
 }
+
+@media (min-width: 320px) and (min-height: 568px){
+    p{ font-size: $font-small;
+    padding: $padding-small}
+}
+
+@media(min-width: 424px) and (min-height: 574px){
+    p{
+        font-size: $font-medium;
+        padding: $padding-medium;
+    }
+}
+
+h1{
+    font-size: $font-medium;
+    padding: $padding-small;
+}
+}
+
+// link styler.
+
 
   li{
     color: white;
 }
 
-  .login  {
-     width: 100px;
-     justify-content: start
-     }
-
-     .register{
-     width: 100px;
-     justify-content: start
-     }
+button{
+  width: 6rem;
+  height: 2rem;
+  border-color: #181d1f;
 
 }
+
+// divs containing component layouts.
+
+.main{
+  display:flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  text-align: center;
+  input{
+      width:40vw;
+  }
+
+
+
+  // modal styling.
+
+  .edit-delete{
+      display: flex;
+      justify-content: space-evenly;
+      width: 100vw;
+  }
+  
+}
+
+// main nav bar styling.
+
+#home-nav{
+  display: flex;
+  align-items: center;
+  height: 12vh;
+  width: 100vw;
+  padding: 0;
+  margin: 0;
+  background-image:linear-gradient(to bottom, rgba(210, 220, 226, 0.5), rgba(166, 166, 182, 0.5)),
+   url('https://png.pngtree.com/thumb_back/fw800/back_pic/04/15/61/975822e56aed9ad.JPG');
+   background-position: center;
+   background-size: cover;
+
+  //  logo picture specs.
+   .logo{
+     width: 7rem;
+     height: 2rem
+   }
+
+  // just what it says :)
+
+   #burger-menu{
+     width: 4rem;
+     height:3rem;
+
+   }
+}
+
+
 
 
 

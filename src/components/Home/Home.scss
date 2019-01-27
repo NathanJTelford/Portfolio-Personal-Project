@@ -1,96 +1,24 @@
-$font-small: 25px;
-$font-medium: 45px;
-$font-large: 60px;
-$padding-small: 5px;
-$padding-medium: 10px;
-
-
-
 
 .main{
-
-    font-size: 
-    button{
-        border-radius: 5px;
-    }
-    p {
-        font-size: $font-small;
-        text-align: center;
-        padding: $padding-small;
-    }
-
-    @media (min-width: 320px) and (min-height: 568px){
-        p{ font-size: $font-small;
-        padding: $padding-small}
-    }
-    
-    @media(min-width: 424px) and (min-height: 574px){
-        p{
-            font-size: $font-medium;
-            padding: $padding-medium;
-        }
-    }
-
-    h1{
-        font-size: $font-medium;
-        padding: $padding-small;
-    }
-
-    
-    #home-nav{
-        display: flex;
-        height: 51px;
-        background-color: rgb(94, 15, 15);
-        width: 100vw;
-        padding: 0;
-        margin: 0;
-        
-        
-        img{
-            
-            align-items: center;
-            height: 35px;
-            width: 140px;
-        }
-        
-        li{
-            color: white;
-        }
-        
-        .login  {
-            width: 70px;
-            justify-content: flex-start
-        }
-        
-        .register{
-            justify-content: flex-start
-        }
-        
-    }
-
-}
-
-#welcome{
+ 
+.welcome{
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: 0;
-    padding: 1em;
-
+    padding: 1rem;
+    
 }
 
+.make_game{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin:0;
+    padding: 1rem;
+}
 
-
-
-    
-    #make_game{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin:0;
-        padding: 1em;
-    }
-
+}
 
 
 

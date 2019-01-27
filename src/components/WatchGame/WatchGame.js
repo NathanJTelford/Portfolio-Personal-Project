@@ -4,6 +4,7 @@ import axios from 'axios';
 import { teamOneScore, teamTwoScore } from './../../ducks/user';
 import { connect } from 'react-redux';
 import Logo from './../../../src/LogoMakr_1vONm5.png';
+import Nav from './../Nav/Nav';
 
 
 
@@ -94,27 +95,7 @@ class watchGame extends Component {
         const { name, teamName1, teamName2, teamOneScore, teamTwoScore, username, pic, code } = this.state;
         return (
             <div className='main'>
-                <nav id='home-nav'>
-                    <div className='logo'>
-
-                        <Link to='/'>
-                            <img src={Logo} alt='' />
-                        </Link>
-
-                    </div>
-                    <ul>
-                        <div className='login'>
-                            <Link to='/login'>
-                                <li href='/login'>Login</li>
-                            </Link>
-                        </div>
-                        <div className='register'>
-                            <Link to='/register'>
-                                <li>Register</li>
-                            </Link>
-                        </div>
-                    </ul>
-                </nav>
+              <Nav/>
                 <div id='coach_info'>
                     <div id='pic'>
                         <img src={pic} alt='' />

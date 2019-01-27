@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Logo from './../../../src/LogoMakr_1vONm5.png';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import Nav from './../Nav/Nav';
 // import io from 'socket.io-client';
 
 
@@ -48,27 +49,7 @@ class clientWatch extends Component {
         const { name, teamName1, teamName2, username, pic, code, teamOneScore, teamTwoScore } = this.state;
         return (
             <div className='main'>
-                <nav id='home-nav'>
-                    <div className='logo'>
-
-                        <Link to='/'>
-                            <img src={Logo} alt='' />
-                        </Link>
-
-                    </div>
-                    <ul>
-                        <div className='login'>
-                            <Link to='/login'>
-                                <li href='/login'>Login</li>
-                            </Link>
-                        </div>
-                        <div className='register'>
-                            <Link to='/register'>
-                                <li>Register</li>
-                            </Link>
-                        </div>
-                    </ul>
-                </nav>
+            <Nav/>
                 <div id='coach_info'>
                     <div id='pic'>
                         <img src={pic} alt='' />
