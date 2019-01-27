@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Axios from 'axios';
 
 const Burger = ({ flipBurger, menuOut, children }) => {
     const showHideClassName = menuOut ? 'menu display-block' : 'menu display-none';
@@ -9,22 +10,31 @@ const Burger = ({ flipBurger, menuOut, children }) => {
         <div className={showHideClassName}>
             <section className='nav-main'>
                 {children}
-                <div className='links'>
+                <div className='links' onClick={()=>flipBurger()}>
                     <ul>
-                       
-                            <Link to='/login'>
+
+                    <div>
+                            <Link to='/' style={{ textDecoration: 'none' }}>
+                            <li>Home</li>
+                            </Link>
+                        </div>
+                        <div className='login-link'>
+                            <Link to='/login' style={{ textDecoration: 'none' }}>
                                 <li>Login</li>
                             </Link>
-                       
-                            <Link to='/register'>
+
+                        </div>
+                        <div className='register-link'>
+                            <Link to='/register' style={{ textDecoration: 'none' }}>
                                 <li>Register</li>
                             </Link>
-                       
-                            <Link to='/logout'>
+                        </div>
+                        <div className='logout-link'>
+                            <Link to='/' style={{ textDecoration: 'none' }} onClick={()=>{Axios.get('/auth/logout').then(()=>{})}}>
                                 <li>Logout</li>
                             </Link>
-
-
+                        </div>
+                    
 
                     </ul>
                 </div>

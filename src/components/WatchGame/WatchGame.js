@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { teamOneScore, teamTwoScore } from './../../ducks/user';
 import { connect } from 'react-redux';
-import Logo from './../../../src/LogoMakr_1vONm5.png';
 import Nav from './../Nav/Nav';
 
 

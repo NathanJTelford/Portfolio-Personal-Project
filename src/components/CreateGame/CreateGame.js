@@ -49,17 +49,21 @@ class creatGame extends Component {
 
     render() {
         return (
-            <div>
+            <div className='main'>
                     <Nav/>
+                    <br/>
 
                 <div id='game-name'>
                     <h3>Game Name</h3>
+                    <br/>
                     <input onChange={(e) => this.setState({ gameName: e.target.value })} />
                 </div>
+                <br/>
 
-                <div id='team-names'>
+                <div className='team-names'>
                     <h3>Team 1</h3>
                     <input onChange={(e) => this.setState({ teamName1: e.target.value })} />
+                    <br/>
                     <h3>Team 2</h3>
                     <input onChange={(e) => this.setState({ teamName2: e.target.value })} />
 
@@ -68,6 +72,7 @@ class creatGame extends Component {
                 <div id='score-types'>
 
                 </div>
+                <br/>
 
 
                 <button onClick={() => this.handleMakeGame()}>Track Game</button>
