@@ -17,10 +17,10 @@
 // text mods;
 
 $font-small: 1.3rem;
-$font-medium: 3rem;
+$font-medium: 1.8rem;
 $font-large: 5rem;
 $padding-small: 5px;
-$padding-medium: 10px;
+$padding-medium: 2px;
 
 
 .App{
@@ -35,7 +35,7 @@ $padding-medium: 10px;
     padding: $padding-small}
 }
 
-@media(min-width: 424px) and (min-height: 574px){
+@media(min-width: 360px) and (min-height: 640px){
     p{
         font-size: $font-medium;
         padding: $padding-medium;
@@ -45,6 +45,9 @@ $padding-medium: 10px;
 h1{
     font-size: $font-medium;
     padding: $padding-small;
+    @media(min-width: 411) and ( min-height:731 ){
+      font-size: 2.8rem;
+}
 }
 }
 
@@ -52,8 +55,13 @@ button{
   width: 6rem;
   height: 2rem;
   border-color: #181d1f;
+  @media(min-width: 411) and ( min-height:731 ){
+    width: 7rem;
+    height: 3rem;
+  }
 
 }
+
 
 // divs containing component layouts.
 
@@ -65,6 +73,9 @@ button{
   text-align: center;
   input{
       width:40vw;
+      @media(min-width: 411) and ( min-height:731 ){
+        height: 2rem;
+      }
   }
 
 
@@ -98,6 +109,11 @@ button{
      width: 7rem;
      height: 2rem;
      padding-left: 1rem;
+
+     @media(min-height: 640px) and (min-width: 360px){
+       width: 9rem;
+       height: 3rem;
+     }
    }
 
   // just what it says :)
@@ -107,11 +123,19 @@ button{
      width: 4rem;
      height:3rem;
 
+     @media(min-width: 411) and ( min-height:731 ){
+      width: 5rem;
+      height:4rem;
+     }
+
    }
 
    .burger-house{
      padding-left: 6rem;
      padding-right: 1rem;
+     @media(min-width: 411) and ( min-height:731 ){
+       padding-left: 8rem;
+     }
    }
 
    .links{

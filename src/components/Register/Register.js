@@ -49,25 +49,25 @@ export default class register extends Component {
                 <Nav/>
                 <br />
                 <div>
-                    <label for='username'>username</label>
+                    <p>Username</p>
                     <br />
                     <input onChange={(e) => this.handleUsername(e.target.value)} type='text' name='username' id='username' />
                 </div>
                 <br />
                 <div>
-                    <label for='email'>Email</label>
+                    <p>Email</p>
                     <br />
                     <input onChange={(e) => this.handleEmail(e.target.value)} type='text' name='email' id='email' />
                 </div>
                 <br />
                 <div>
-                    <label for='password'>Password</label>
+                   <p>Password</p>
                     <br />
                     <input onChange={(e) => this.handlePasswordCreate(e.target.value)} type='text' name='password' id='password' type='password' />
                 </div>
                 <br />
                 <div>
-                    <label for='profile picture'>Profile Picture</label>
+                    <p>Profile Picture</p>
                     <br />
                     <input onChange={(e) => this.handlePic(e.target.value)} type='text' name='profile picture' id='profile picture' />
                 </div>

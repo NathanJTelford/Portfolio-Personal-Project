@@ -30,6 +30,10 @@
             width: 125px;
             height: 71px;
             z-index: 2;
+            @media(min-width: 411) and ( min-height:731 ){
+                width: 158px;
+                height: 102px;
+              }
             }
         }
     }
