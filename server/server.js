@@ -35,23 +35,22 @@ const io = socket(app.listen(SERVER_PORT, () => { console.log('Battle Cruiser Op
 // sockets
 io.on('connection', socket => {
     console.log('socket connected')
-    socket.on('emit message to general', data => {
-        console.log('test endpoint hit: emit');
-        sockets.emit('generate general response', data)
-    })
-    socket.on('blast message to general', data => {
+
+    socket.on('blast message to room', data => {
         console.log('general socket hit: blast')
         io.sockets.emit('generate general response', data);
     });
 
+    // socket.on('join', data=>{
+    //     socket.join(data.room);
+    //     console.log('join success', data.room);
+    //     io.to(data.room).emit('room joined', data)
+    // })
+    
+
 })
 
 
-// socket.on('join', data=>{
-//     socket.join(data.room);
-//     console.log('join success', data.room);
-//     io.to(data.room).emit('room joined', data)
-// })
 
 // login/auth
 app.post('/auth/register', authCTRL.register);

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { getFieldCode } from './../../ducks/user';
 import axios from 'axios';
-// import clientWatch from './../ClientWatch/ClientWatch';
 import Nav from './../Nav/Nav';
 
 
@@ -12,6 +13,15 @@ class Home extends Component {
             fieldCode: [],
             code: '',
         }
+    }
+
+
+    addSpectator(){
+        this.setState({
+            fieldCode: [...this.state.fieldCode, this.state.code],
+            code:''
+
+        })
     }
 
 
@@ -43,7 +53,7 @@ class Home extends Component {
                     <input type='text' placeholder='Field Code' onChange={(e) => { this.handleCode(e.target.value) }} />
                     <br />
                     <Link to='/clientWatch'>
-                    <button >Watch Game</button>
+                    <button onClick={()=>this.addSpectator()}>Watch Game</button>
                     </Link>
                 </div>
                 <div className='make_game'>
@@ -60,5 +70,6 @@ class Home extends Component {
         );
     }
 }
+const mapState = (reduxState) => reduxState;
 
-export default Home;
+export default connect(mapState, { getFieldCode })(Home);

@@ -20,6 +20,8 @@ class clientWatch extends Component {
             code: ''
 
         }
+        this.socket = io.connect(':4040');
+        this.socket.on('generate general response', (data)=>{this.setState({teamOneScore:data.message, teamTwoScore: data.message2})})
     }
 
     async componentDidMount() {
@@ -33,10 +35,6 @@ class clientWatch extends Component {
             this.setState({ pic: res[1].data.pic })
             this.setState({ code: res[2].data.code })
             this.setState({teamOneScore:teamOneScore, teamTwoScore,teamTwoScore})
-                if (this.state.code) {
-                  this.socket.emit("join room ", { room: this.props.room });
-                
-              }
         }
 
         catch (e) {

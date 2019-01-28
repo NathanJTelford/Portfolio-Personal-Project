@@ -27,15 +27,10 @@ class watchGame extends Component {
     }
 
 
-    sendScore(message){
-        if(this.props.room){
-            this.socket.emit('blast message to room', { message, room: this.props.room })
-        }
-    }
-
-
-
-
+    
+    
+    
+    
     async componentDidMount() {
         try {
             const res = await axios.all([axios.get('/getGame'), axios.get('/getUser'), axios.get('/getCode')])
@@ -46,11 +41,18 @@ class watchGame extends Component {
             this.setState({ pic: res[1].data.pic })
             this.setState({ code: res[2].data.code })
         }
-
+        
         catch (e) {
         }
-
+        
     }
+
+    
+    updateScore(){
+            this.socket.emit('blast message to room', { message: this.state.teamOneScore, message2:this.state.teamTwoScore })
+        }
+
+
 
     async saveGame() {
         const { gameName, teamName1, teamName2, teamOneScore, teamTwoScore,username } = this.state;
@@ -180,7 +182,7 @@ class watchGame extends Component {
 
                     <p>Register or login to save a game</p>
                     <button onClick={()=>this.saveGame()}>Save Game</button>
-                    <button>Update </button>
+                    <button onClick={()=>this.updateScore()}>Update </button>
 
                 </div>
             </div>
