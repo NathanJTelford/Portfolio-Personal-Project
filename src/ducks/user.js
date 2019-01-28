@@ -3,7 +3,8 @@ const initialState = {
     password: '',
     game: {},
     teamOneScore: 0,
-    teamTwoScore: 0
+    teamTwoScore: 0,
+    code: ''
 }
 
 const GET_USER_DATA = 'GET_USER_DATA';

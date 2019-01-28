@@ -3,6 +3,7 @@ import axios from 'axios';
 import { teamOneScore, teamTwoScore } from './../../ducks/user';
 import { connect } from 'react-redux';
 import Nav from './../Nav/Nav';
+import io from 'socket.io-client';
 
 
 
@@ -22,7 +23,18 @@ class watchGame extends Component {
             winner2: 0,
 
         }
+        this.socket = io.connect(':4040');
     }
+
+
+    sendScore(message){
+        if(this.props.room){
+            this.socket.emit('blast message to room', { message, room: this.props.room })
+        }
+    }
+
+
+
 
     async componentDidMount() {
         try {
@@ -168,6 +180,7 @@ class watchGame extends Component {
 
                     <p>Register or login to save a game</p>
                     <button onClick={()=>this.saveGame()}>Save Game</button>
+                    <button>Update </button>
 
                 </div>
             </div>

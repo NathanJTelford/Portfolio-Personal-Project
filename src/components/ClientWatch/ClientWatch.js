@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import { teamOneScore, teamTwoScore } from './../../ducks/user';
+import { getFieldCode } from './../../ducks/user';
 import { connect } from 'react-redux';
-import Logo from './../../../src/LogoMakr_1vONm5.png';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Nav from './../Nav/Nav';
-// import io from 'socket.io-client';
+import io from 'socket.io-client';
 
 
 class clientWatch extends Component {
@@ -35,6 +33,10 @@ class clientWatch extends Component {
             this.setState({ pic: res[1].data.pic })
             this.setState({ code: res[2].data.code })
             this.setState({teamOneScore:teamOneScore, teamTwoScore,teamTwoScore})
+                if (this.state.code) {
+                  this.socket.emit("join room ", { room: this.props.room });
+                
+              }
         }
 
         catch (e) {
@@ -83,4 +85,4 @@ class clientWatch extends Component {
 }
 
 const mapState = (reduxState) => reduxState;
-export default connect(mapState, { teamOneScore, teamTwoScore })(clientWatch)
+export default connect(mapState, { getFieldCode })(clientWatch)

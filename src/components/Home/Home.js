@@ -14,16 +14,7 @@ class Home extends Component {
         }
     }
 
-    sendCode = async () => {
-        let response = await axios.get('/getCode');
-        if(this.state.code !== response){
-            alert('Wrong Code, Please Try Again')
-        }
-        else{
-            this.props.push('/clientWatch')
-        }
 
-    }
 
     logout(){
         axios.get('/auth/logout')
@@ -52,7 +43,7 @@ class Home extends Component {
                     <input type='text' placeholder='Field Code' onChange={(e) => { this.handleCode(e.target.value) }} />
                     <br />
                     <Link to='/clientWatch'>
-                    <button onClick={() => this.sendCode(this.state.code)}>Watch Game</button>
+                    <button >Watch Game</button>
                     </Link>
                 </div>
                 <div className='make_game'>
