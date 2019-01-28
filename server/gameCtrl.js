@@ -56,16 +56,32 @@ module.exports = {
         }
         const db = req.app.get('db');
         const { gameName, teamName1, teamName2, teamOneScore, teamTwoScore } = req.body;
-        const { email } =req.session.user;
+        const { email } = req.session.user;
         let response = await db.find_coach({email: email})
         const { coach_id } = response[0];
         if (!req.session.user) {
             return res.status(404).send({message: req.session})          
         }else{
             winner = Math.max(teamOneScore, teamTwoScore);
+            if(winner === teamOneScore){
+                winner = teamName1
+            }else{
+                winner = teamName2
+            }
           await db.save_game({ gameName: gameName, teamName1: teamName1, teamName2: teamName2, teamOneScore:teamOneScore, teamTwoScore:teamTwoScore, winner: winner, id:  coach_id  })
         }
         res.status(200).send({ message: 'game saved' })
+    },
+
+    getStats: async (req,res)=>{
+        const db = req.app.get('db')
+        if(!req.session.user){
+            return res.status(401).send({message:'Not Logged In'})
+        }else {
+            const { id } =req.session.user;
+        let response =  await  db.get_stats({id:id})
+            return res.status(200).send(response)
+        }
     }
 
 }

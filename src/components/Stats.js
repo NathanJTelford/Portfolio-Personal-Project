@@ -1,11 +1,25 @@
-import React from 'react';
+import React, { Component } from 'react';
+import Axios from 'axios';
 
-export default function Stats(){
+export default class Stats extends Component {
+    constructor() {
+        super()
+        this.state = {
 
+        }
+    }
 
-    return(
-        <div> 
-            Stats Here
-        </div>
-    )
+    componentDidMount(){
+        Axios.get('/getStats').then(()=>{
+            
+        })
+    }
+
+    render() {
+        return (
+            <div>
+                Stats Here
+            </div>
+        )
+    }
 }

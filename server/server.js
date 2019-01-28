@@ -67,6 +67,7 @@ app.post(`/scorekeeper/:teamOneScore/:teamTwoScore`, gameCtrl.scoreKeeper)
 
 // display endpoints
 
+app.get('/getStats', gameCtrl.getStats);
 app.get('/getGame', gameCtrl.getGame);
 app.get('/getScore', gameCtrl.getScore);
 app.get('/getUser', gameCtrl.getUser);
