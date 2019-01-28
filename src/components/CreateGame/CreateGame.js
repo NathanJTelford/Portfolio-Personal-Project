@@ -46,7 +46,6 @@ class creatGame extends Component {
 
 
 
-
     render() {
         return (
             <div className='main'>

@@ -65,6 +65,7 @@ module.exports = {
         if (fieldCode === req.session.code) {
             return true
         }
+        return res.status(200).send({message:'Field code accepted'})
     }
 
 

@@ -13,6 +13,7 @@ import CreateGame from './components/CreateGame/CreateGame';
 import Home from './components/Home/Home';
 import Register from './components/Register/Register';
 import Login from './components/Login/Login';
+import Stats from './components/Stats'
 import { Switch, Route, HashRouter } from 'react-router-dom';
 
 class App extends Component {
@@ -32,6 +33,7 @@ class App extends Component {
                 <Route path='/register' component={Register}></Route>
                 <Route path='/login' component={Login} ></Route>
                 <Route path='/clientWatch' component={ClientWatch}></Route>
+                <Route path='/stats' component={Stats}></Route>
               </Switch>
             </HashRouter>
           </div>

@@ -17,7 +17,9 @@ class watchGame extends Component {
             teamName2: '',
             username: '',
             pic: '',
-            code: ''
+            code: '',
+            winner1: 0,
+            winner2: 0,
 
         }
     }
@@ -38,14 +40,22 @@ class watchGame extends Component {
 
     }
 
-      handlePointOneT1 = async () => {
+    async saveGame() {
+        const { gameName, teamName1, teamName2, teamOneScore, teamTwoScore,username } = this.state;
+        if(!username){
+            return alert('Please Log In')
+        }
+        axios.post('/saveGame', { gameName: gameName, teamName1: teamName1, teamName2: teamName2, teamOneScore: teamOneScore, teamTwoScore: teamTwoScore })
+    }
+
+    handlePointOneT1 = async () => {
         let newScore = this.state.teamOneScore;
         newScore = newScore + 1
         await this.setState({ teamOneScore: newScore })
         this.props.teamOneScore(this.state.teamOneScore)
     }
 
-      handlePointTwoT1 = async () => {
+    handlePointTwoT1 = async () => {
         let newScore = this.state.teamOneScore;
         newScore = newScore + 2
         await this.setState({ teamOneScore: newScore })
@@ -53,7 +63,7 @@ class watchGame extends Component {
 
     }
 
-      handlePointThreeT1 = async () => {
+    handlePointThreeT1 = async () => {
         let newScore = this.state.teamOneScore;
         newScore = newScore + 3
         await this.setState({ teamOneScore: newScore })
@@ -61,7 +71,7 @@ class watchGame extends Component {
 
     }
 
-      handlePointOneT2 = async () => {
+    handlePointOneT2 = async () => {
         let newScore = this.state.teamTwoScore;
         newScore = newScore + 1
         await this.setState({ teamTwoScore: newScore })
@@ -69,7 +79,7 @@ class watchGame extends Component {
 
     }
 
-      handlePointTwoT2 = async () => {
+    handlePointTwoT2 = async () => {
         let newScore = this.state.teamTwoScore;
         newScore = newScore + 2
         await this.setState({ teamTwoScore: newScore })
@@ -77,12 +87,24 @@ class watchGame extends Component {
 
     }
 
-      handlePointThreeT2 = async () => {
+    handlePointThreeT2 = async () => {
         let newScore = this.state.teamTwoScore;
         newScore = newScore + 3
         await this.setState({ teamTwoScore: newScore })
         this.props.teamTwoScore(this.state.teamTwoScore)
 
+    }
+
+    minusTeamOne() {
+        let newScore = this.state.teamOneScore;
+        newScore = newScore - 1
+        this.setState({ teamOneScore: newScore })
+    }
+
+    minusTeamTwo() {
+        let newScore = this.state.teamTwoScore;
+        newScore = newScore - 1
+        this.setState({ teamTwoScore: newScore })
     }
 
 
@@ -93,7 +115,7 @@ class watchGame extends Component {
         const { name, teamName1, teamName2, teamOneScore, teamTwoScore, username, pic, code } = this.state;
         return (
             <div className='main'>
-              <Nav/>
+                <Nav />
                 <div id='coach_info'>
                     <div id='pic'>
                         <img src={pic} alt='' />
@@ -116,9 +138,12 @@ class watchGame extends Component {
 
                         <button onClick={() => this.handlePointThreeT1()} >3 Points</button>
 
+                        <button onClick={() => this.minusTeamOne()}>  - 1 point</button>
+
                     </div>
                     <div id='teamOneScore'>
-                        {teamOneScore}
+                        <h1>{teamOneScore}</h1>
+
                     </div>
                 </div>
                 <br />
@@ -130,12 +155,21 @@ class watchGame extends Component {
                         <button onClick={() => this.handlePointTwoT2()} >2 Points</button>
 
                         <button onClick={() => this.handlePointThreeT2()} >3 Points</button>
+
+                        <button onClick={() => this.minusTeamTwo()}> - 1 Point</button>
                     </div>
                     <div id='teamTwoScore'>
-                        {teamTwoScore}
+                        <h1>{teamTwoScore}</h1>
+
                     </div>
                 </div>
+                <br />
+                <div>
 
+                    <p>Register or login to save a game</p>
+                    <button onClick={()=>this.saveGame()}>Save Game</button>
+
+                </div>
             </div>
         )
     }

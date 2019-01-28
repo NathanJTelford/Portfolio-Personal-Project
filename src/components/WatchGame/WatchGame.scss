@@ -49,6 +49,8 @@
             flex-direction: column;
             width:100vw;
             height: 40vh;
+            border-bottom: 3px solid black;
+            border-top: 3px solid black;
 
             #teamOneScore{
             }
@@ -61,6 +63,7 @@
             flex-direction: column;
             width:100vw;
             height: 40vh;
+            border-bottom: 3px solid black;
 
             #teamTwoScore{
             }

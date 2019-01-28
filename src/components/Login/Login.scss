@@ -4,7 +4,6 @@
     flex-direction: column;
     text-align: center;
     align-items: center;
-    text-align: center;
     input{
         width:50vw;
     }
@@ -67,6 +66,7 @@
     top:50%;
     left:50%;
     transform: translate(-50%,-50%);
+    justify-content: center;
       
     .flex{
         margin: auto;

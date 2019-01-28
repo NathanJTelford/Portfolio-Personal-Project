@@ -2,7 +2,9 @@ Coach Table
 create table coach_id (coach_id serial primary key, username VARCHAR(40), hash_code VARCHAR(64), email VARCHAR(80), pic text)
 
 Game Table
-create table game (game_id serial primary key, winner_id int REFERENCES team(team_id), coach_id int REFERENCES coach_id(coach_id), game_type int REFERENCES game_type(game_type_id))
+create table game (game_id serial primary key, game_name varchar(30),team_1_name varchar(40), team_2_name varchar(40),team_1_score int, team_2_score int, winner varchar(40), coach_id int REFERENCES coach_id(coach_id))
+
+
 
 Team Table
 create table team (team_id serial primary key, team_name varchar(45))

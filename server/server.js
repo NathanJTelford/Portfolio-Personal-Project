@@ -61,6 +61,7 @@ app.post(`/auth/code/:fieldCode`, authCTRL.authCode);
 
 // save endpoints
 
+app.post('/saveGame', gameCtrl.saveGame);
 app.post('/makeGame', gameCtrl.makeGame);
 app.post(`/scorekeeper/:teamOneScore/:teamTwoScore`, gameCtrl.scoreKeeper)
 

@@ -29,6 +29,11 @@ const Burger = ({ flipBurger, menuOut, children }) => {
                                 <li>Register</li>
                             </Link>
                         </div>
+                        <div>
+                            <Link to='/stats' style={{ textDecoration: 'none' }}>
+                            <li>Stats</li>
+                            </Link>
+                        </div>
                         <div className='logout-link'>
                             <Link to='/' style={{ textDecoration: 'none' }} onClick={()=>{Axios.get('/auth/logout').then(()=>{})}}>
                                 <li>Logout</li>
