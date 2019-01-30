@@ -1,14 +1,9 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
-import Logo from './../../../src/LogoMakr_1vONm5.png';
-// import io from 'socket.io-client';
-import { connect } from 'react-redux';
-import { getFieldCode } from './../../ducks/user'
 import Nav from './../Nav/Nav';
 
 
-class creatGame extends Component {
+export default  class creatGame extends Component {
     constructor() {
         super()
         this.state = {
@@ -32,8 +27,6 @@ class creatGame extends Component {
         const { fieldCode } = this.state;
         await axios.post('/storeCode',{fieldCode: fieldCode} )
         }
-        
-        this.props.getFieldCode(randomCode)
     }
 
 
@@ -80,6 +73,3 @@ class creatGame extends Component {
         )
     }
 }
-
-const mapState = (reduxState) => reduxState;
-export default connect(mapState, { getFieldCode })(creatGame)

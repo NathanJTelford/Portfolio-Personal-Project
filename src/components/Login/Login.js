@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
-import Logo from './../../../src/LogoMakr_1vONm5.png';
-import { connect } from 'react-redux';
-import { getUserData, getEmail, getPassword } from './../../ducks/user'
 import Modal from './Modal';
 import EditModal from './EditModal';
 import Nav from './../Nav/Nav'
 
 
-class login extends Component {
+export default class login extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -103,6 +99,3 @@ class login extends Component {
         )
     }
 }
-
-const mapState = (reduxState) => reduxState;
-export default connect(mapState, { getUserData, getEmail, getPassword })(login)

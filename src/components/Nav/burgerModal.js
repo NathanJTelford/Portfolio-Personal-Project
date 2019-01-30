@@ -39,7 +39,7 @@ const Burger = ({ flipBurger, menuOut, children }) => {
                         </div>
                         <br/>
                         <div className='logout-link'>
-                            <Link to='/' style={{ textDecoration: 'none' }} onClick={()=>{Axios.get('/auth/logout').then(()=>{})}}>
+                            <Link to='/' style={{ textDecoration: 'none' }} onClick={()=>{Axios.get('/auth/logout').then(()=>{alert('Logged Out')})}}>
                                 <li>Logout</li>
                             </Link>
                         </div>

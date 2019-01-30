@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import { getFieldCode } from './../../ducks/user';
-import { connect } from 'react-redux';
 import axios from 'axios';
 import Nav from './../Nav/Nav';
 import io from 'socket.io-client';
 
 
-class clientWatch extends Component {
+export default  class clientWatch extends Component {
     constructor() {
         super()
         this.state = {
@@ -81,6 +79,3 @@ class clientWatch extends Component {
         )
     }
 }
-
-const mapState = (reduxState) => reduxState;
-export default connect(mapState, { getFieldCode })(clientWatch)
