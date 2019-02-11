@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { teamOneScore, teamTwoScore } from './../../ducks/user';
-import { connect } from 'react-redux';
 import Nav from './../Nav/Nav';
 import io from 'socket.io-client';
 
 
 
-class watchGame extends Component {
+export default class watchGame extends Component {
     constructor() {
         super()
         this.state = {
@@ -48,8 +46,9 @@ class watchGame extends Component {
     }
 
     
-    updateScore(){
-            this.socket.emit('blast message to room', { message: this.state.teamOneScore, message2:this.state.teamTwoScore })
+    updateScore = async ()=>{
+            await this.socket.emit('blast message to room', { message: this.state.teamOneScore, message2:this.state.teamTwoScore })
+            
         }
 
 
@@ -66,14 +65,14 @@ class watchGame extends Component {
         let newScore = this.state.teamOneScore;
         newScore = newScore + 1
         await this.setState({ teamOneScore: newScore })
-        this.props.teamOneScore(this.state.teamOneScore)
+        this.updateScore()
     }
 
     handlePointTwoT1 = async () => {
         let newScore = this.state.teamOneScore;
         newScore = newScore + 2
         await this.setState({ teamOneScore: newScore })
-        this.props.teamOneScore(this.state.teamOneScore)
+        this.updateScore()
 
     }
 
@@ -81,7 +80,7 @@ class watchGame extends Component {
         let newScore = this.state.teamOneScore;
         newScore = newScore + 3
         await this.setState({ teamOneScore: newScore })
-        this.props.teamOneScore(this.state.teamOneScore)
+        this.updateScore()
 
     }
 
@@ -89,7 +88,7 @@ class watchGame extends Component {
         let newScore = this.state.teamTwoScore;
         newScore = newScore + 1
         await this.setState({ teamTwoScore: newScore })
-        this.props.teamTwoScore(this.state.teamTwoScore)
+        this.updateScore()
 
     }
 
@@ -97,7 +96,7 @@ class watchGame extends Component {
         let newScore = this.state.teamTwoScore;
         newScore = newScore + 2
         await this.setState({ teamTwoScore: newScore })
-        this.props.teamTwoScore(this.state.teamTwoScore)
+        this.updateScore()
 
     }
 
@@ -105,20 +104,22 @@ class watchGame extends Component {
         let newScore = this.state.teamTwoScore;
         newScore = newScore + 3
         await this.setState({ teamTwoScore: newScore })
-        this.props.teamTwoScore(this.state.teamTwoScore)
+        this.updateScore()
 
     }
 
-    minusTeamOne() {
+    minusTeamOne = async () => {
         let newScore = this.state.teamOneScore;
         newScore = newScore - 1
-        this.setState({ teamOneScore: newScore })
+        await this.setState({ teamOneScore: newScore })
+        this.updateScore()
     }
 
-    minusTeamTwo() {
+    minusTeamTwo = async () => {
         let newScore = this.state.teamTwoScore;
         newScore = newScore - 1
-        this.setState({ teamTwoScore: newScore })
+        await this.setState({ teamTwoScore: newScore })
+        this.updateScore()
     }
 
 
@@ -182,13 +183,8 @@ class watchGame extends Component {
 
                     <p>Register or login to save a game</p>
                     <button onClick={()=>this.saveGame()}>Save Game</button>
-                    <button onClick={()=>this.updateScore()}>Update </button>
-
                 </div>
             </div>
         )
     }
 }
-
-const mapState = (reduxState) => reduxState;
-export default connect(mapState, { teamOneScore, teamTwoScore })(watchGame)

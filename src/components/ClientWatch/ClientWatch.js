@@ -24,7 +24,6 @@ export default  class clientWatch extends Component {
 
     async componentDidMount() {
         try {
-            const { teamOneScore, teamTwoScore } = this.props;
             const res = await axios.all([axios.get('/getGame'), axios.get('/getUser'), axios.get('/getCode')])
             this.setState({ gameName: res[0].data.name })
             this.setState({ teamName1: res[0].data.teamName1 })
@@ -32,7 +31,6 @@ export default  class clientWatch extends Component {
             this.setState({ username: res[1].data.username })
             this.setState({ pic: res[1].data.pic })
             this.setState({ code: res[2].data.code })
-            this.setState({teamOneScore:teamOneScore, teamTwoScore,teamTwoScore})
         }
 
         catch (e) {
